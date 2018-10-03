@@ -3,6 +3,8 @@ package uy.ort.ob201802;
 import uy.ort.ob201802.Retorno.Resultado;
 
 public class Sistema implements ISistema {
+	
+	private Nodo servidor;
 
 	@Override
 	public Retorno inicializarSistema (int maxPuntos, Double coordX, Double coordY) {
