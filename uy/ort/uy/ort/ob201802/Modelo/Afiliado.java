@@ -1,4 +1,4 @@
-package uy.ort.ob201802;
+package uy.ort.ob201802.Modelo;
 
 public class Afiliado {
 

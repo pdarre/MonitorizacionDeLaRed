@@ -1,5 +1,6 @@
 package uy.ort.ob201802;
 
+import uy.ort.ob201802.Modelo.Nodo;
 import uy.ort.ob201802.Retorno.Resultado;
 
 public class Sistema implements ISistema {
