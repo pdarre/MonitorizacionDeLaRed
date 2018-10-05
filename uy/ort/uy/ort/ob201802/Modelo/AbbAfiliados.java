@@ -48,4 +48,9 @@ public class AbbAfiliados {
 
     public void insertar(Afiliado afiliado) {        
     }
+
+	public Afiliado getAfiliadoByCi(String cedula) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

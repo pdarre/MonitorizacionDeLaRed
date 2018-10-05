@@ -1,17 +1,24 @@
 package uy.ort.ob201802;
 
+import uy.ort.ob201802.Modelo.AbbAfiliados;
+import uy.ort.ob201802.Modelo.Afiliado;
+import uy.ort.ob201802.Modelo.Cedula;
+import uy.ort.ob201802.Modelo.Email;
 import uy.ort.ob201802.Modelo.Nodo;
 import uy.ort.ob201802.Retorno.Resultado;
+import uy.ort.ob20182.Retorno;
 
 public class Sistema implements ISistema {
-	
+
 	private Nodo servidor;
+	private AbbAfiliados arbolAfiliados;
 
 	@Override
-	public Retorno inicializarSistema (int maxPuntos, Double coordX, Double coordY) {
+	public Retorno inicializarSistema(int maxPuntos, Double coordX, Double coordY) {
+		arbolAfiliados = new AbbAfiliados();
 		return new Retorno(Resultado.NO_IMPLEMENTADA);
 	}
-	
+
 	@Override
 	public Retorno destruirSistema() {
 		return new Retorno(Resultado.NO_IMPLEMENTADA);
@@ -19,7 +26,15 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno registrarAfiliado(String cedula, String nombre, String email) {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		if (!Cedula.esCIValida(Cedula.convertirCedula(cedula))) {
+			return new Retorno(Resultado.ERROR_1);
+		} else if (!Email.isValid(email)) {
+			return new Retorno(Resultado.ERROR_2);
+		} else if (arbolAfiliados.getAfiliadoByCi(cedula) != null) {
+			return new Retorno(Resultado.ERROR_3);
+		}
+		arbolAfiliados.insertar(new Afiliado(cedula, nombre, email));
+		return new Retorno(Resultado.OK);
 	}
 
 	@Override
@@ -68,7 +83,4 @@ public class Sistema implements ISistema {
 		return new Retorno(Resultado.NO_IMPLEMENTADA);
 	}
 
-	
-	
-	
 }

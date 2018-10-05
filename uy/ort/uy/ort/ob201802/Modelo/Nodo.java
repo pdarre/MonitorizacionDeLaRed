@@ -4,6 +4,7 @@ public class Nodo {
 	private String nodoId;
 	private double coordX;
 	private double coordY;
+	
 	public String getNodoId() {
 		return nodoId;
 	}
