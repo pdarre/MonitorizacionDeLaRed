@@ -23,6 +23,7 @@ public class AbbAfiliados {
 	}
 
 	public Afiliado getAfiliado(Afiliado afiliado) {
+		// TO DO
 		return null;
 	}
 
@@ -52,8 +53,26 @@ public class AbbAfiliados {
 	}
 
 	public Afiliado getAfiliadoByCi(String cedula) {
-		// TODO Auto-generated method stub
-		return null;
+		return getAfiliadoByCi(cedula, this.raiz);
+	}
+	
+	public int cont = 1;
+	public Afiliado getAfiliadoByCi(String cedula, Afiliado afiliado) {
+		int ci = Cedula.convertirCI(cedula);
+		if (afiliado == null) {
+			return null;
+		} else {
+			if (ci == Cedula.convertirCI(afiliado.getCedula())) {
+				afiliado.setContador(cont);
+				return afiliado;
+			} else if (ci < Cedula.convertirCI(afiliado.getCedula())) {
+				cont++;
+				return getAfiliadoByCi(cedula, afiliado.getIzq());
+			} else {
+				cont++;
+				return getAfiliadoByCi(cedula, afiliado.getDer());
+			}
+		}
 	}
 
 	public void addAfiliado(Afiliado nuevo, Afiliado raiz) {
@@ -78,5 +97,13 @@ public class AbbAfiliados {
 
 	public void addAfiliado(Afiliado afiliado) {
 		this.addAfiliado(afiliado, this.raiz);
+	}
+
+	public int getCont() {
+		return cont;
+	}
+
+	public void setCont(int cont) {
+		this.cont = cont;
 	}
 }

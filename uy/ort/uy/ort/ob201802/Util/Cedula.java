@@ -1,5 +1,8 @@
 package uy.ort.ob201802.Util;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Cedula {
 
 	public static boolean esCIValida(int cedula) {
@@ -41,5 +44,18 @@ public class Cedula {
 	
 	public static int convertirCI(String ci) {
 		return Integer.parseInt(ci.replaceAll("[\\s\\-\\.\\'\\?/?\\¿\\!\\¡\\,\\:\\)\\(\\_\\@]+",""));
+	}
+	
+	public static boolean checkFormato(String ci) {
+//		Pattern patron = Pattern.compile("[0-9]{1}.[0-9]{3}.[0-9]{3}-[0-9]{1}");
+//	    Matcher mat = patron.matcher(ci);
+//	    if(mat.matches()){
+//	        return true;
+//	    }else{
+//	        return false;
+//	    }
+		
+		//temporal
+		return true;
 	}
 }
