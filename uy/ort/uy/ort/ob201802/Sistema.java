@@ -2,11 +2,10 @@ package uy.ort.ob201802;
 
 import uy.ort.ob201802.Modelo.AbbAfiliados;
 import uy.ort.ob201802.Modelo.Afiliado;
-import uy.ort.ob201802.Modelo.Cedula;
-import uy.ort.ob201802.Modelo.Email;
 import uy.ort.ob201802.Modelo.Nodo;
 import uy.ort.ob201802.Retorno.Resultado;
-import uy.ort.ob20182.Retorno;
+import uy.ort.ob201802.Util.Cedula;
+import uy.ort.ob201802.Util.Email;
 
 public class Sistema implements ISistema {
 
@@ -26,7 +25,7 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno registrarAfiliado(String cedula, String nombre, String email) {
-		if (!Cedula.esCIValida(Cedula.convertirCedula(cedula))) {
+		if (!Cedula.esCIValida(Cedula.convertirCI(cedula))) {
 			return new Retorno(Resultado.ERROR_1);
 		} else if (!Email.isValid(email)) {
 			return new Retorno(Resultado.ERROR_2);

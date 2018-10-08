@@ -1,4 +1,4 @@
-package uy.ort.ob201802.Modelo;
+package uy.ort.ob201802.Util;
 
 public class Cedula {
 
@@ -17,7 +17,7 @@ public class Cedula {
 		int digVerificador = Integer.parseInt((ci.charAt(ci.length() - 1)) + "");
 		int[] factores;
 		int temp = ci.length();
-		if (ci.length() == 7) { // CI viejas
+		if (ci.length() == 7) {
 			factores = new int[] { 9, 8, 7, 6, 3, 4 };
 		} else {
 			factores = new int[] { 2, 9, 8, 7, 6, 3, 4 };
@@ -39,7 +39,7 @@ public class Cedula {
 		}
 	}
 	
-	public static int convertirCedula(String ci) {
+	public static int convertirCI(String ci) {
 		return Integer.parseInt(ci.replaceAll("[\\s\\-\\.\\'\\?/?\\¿\\!\\¡\\,\\:\\)\\(\\_\\@]+",""));
 	}
 }

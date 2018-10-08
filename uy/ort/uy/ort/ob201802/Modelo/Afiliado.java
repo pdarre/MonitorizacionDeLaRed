@@ -7,22 +7,22 @@ public class Afiliado {
 	private String email;
 	private Afiliado izq;
 	private Afiliado der;
-	
-	public Afiliado(String cedula, String nombre, String email){
-        this.cedula = cedula;
-        this.nombre = nombre;
-        this.email = email;
-        this.izq = null;
-        this.der = null;
-     }
 
-    public Afiliado(String cedula, String nombre, String email, Afiliado i, Afiliado d){
-    	this.cedula = cedula;
-        this.nombre = nombre;
-        this.email = email;
-        this.izq = i;
-        this.der = d;
-     }
+	public Afiliado(String cedula, String nombre, String email) {
+		this.cedula = cedula;
+		this.nombre = nombre;
+		this.email = email;
+		this.izq = null;
+		this.der = null;
+	}
+
+	public Afiliado(String cedula, String nombre, String email, Afiliado i, Afiliado d) {
+		this.cedula = cedula;
+		this.nombre = nombre;
+		this.email = email;
+		this.izq = i;
+		this.der = d;
+	}
 
 	public String getCedula() {
 		return cedula;

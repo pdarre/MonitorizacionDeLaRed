@@ -7,8 +7,8 @@ import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 import uy.ort.ob201802.Retorno.Resultado;
+import uy.ort.ob201802.Util.Cedula;
 import uy.ort.ob201802.Sistema;
-import uy.ort.ob201802.Modelo.Cedula;
 
 class Test1 {
 
@@ -30,13 +30,13 @@ class Test1 {
 	@Test
 	void testValidadorCedula() {
 		String ci = "3.341.113-7";
-		int ced = Cedula.convertirCedula(ci);
-		boolean valida = Cedula.esCIValida(Cedula.convertirCedula(ci));
+		int ced = Cedula.convertirCI(ci);
+		boolean valida = Cedula.esCIValida(Cedula.convertirCI(ci));
 	}
 	
 	@Test
 	void probarParseo() {
-		int res = Cedula.convertirCedula("3.341.113-7");
+		int res = Cedula.convertirCI("3.341.113-7");
 		System.out.println();
 	}
 }
