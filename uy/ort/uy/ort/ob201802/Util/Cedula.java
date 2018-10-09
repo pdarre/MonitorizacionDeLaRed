@@ -16,7 +16,7 @@ public class Cedula {
 				return false;
 			}
 		}
-		
+
 		int digVerificador = Integer.parseInt((ci.charAt(ci.length() - 1)) + "");
 		int[] factores;
 		int temp = ci.length();
@@ -41,21 +41,21 @@ public class Cedula {
 			return (checkdigit == digVerificador);
 		}
 	}
-	
+
 	public static int convertirCI(String ci) {
-		return Integer.parseInt(ci.replaceAll("[\\s\\-\\.\\'\\?/?\\¿\\!\\¡\\,\\:\\)\\(\\_\\@]+",""));
+		return Integer.parseInt(ci.replaceAll("[\\s\\-\\.\\'\\?/?\\¿\\!\\¡\\,\\:\\)\\(\\_\\@]+", ""));
 	}
-	
+
+	//TEMPORAL, CAMBIAR A EXPRESION REGULAR
 	public static boolean checkFormato(String ci) {
-//		Pattern patron = Pattern.compile("[0-9]{1}.[0-9]{3}.[0-9]{3}-[0-9]{1}");
-//	    Matcher mat = patron.matcher(ci);
-//	    if(mat.matches()){
-//	        return true;
-//	    }else{
-//	        return false;
-//	    }
-		
-		//temporal
-		return true;
+		if (ci.length() >= 11) {
+			String uno = String.valueOf(ci.charAt(1));
+			String dos = String.valueOf(ci.charAt(5));
+			String tres = String.valueOf(ci.charAt(9));
+			if (uno.equals(".") && dos.equals(".") && tres.equals("-")) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

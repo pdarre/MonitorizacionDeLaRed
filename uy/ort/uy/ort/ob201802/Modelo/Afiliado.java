@@ -7,6 +7,7 @@ public class Afiliado {
 	private String email;
 	private Afiliado izq;
 	private Afiliado der;
+	private Afiliado sig;
 	private int contador;
 
 	public Afiliado(String cedula, String nombre, String email) {
@@ -15,7 +16,8 @@ public class Afiliado {
 		this.email = email;
 		this.izq = null;
 		this.der = null;
-		this.setContador(0);
+		this.sig = null;
+		this.setContador(1);
 	}
 
 	public Afiliado(String cedula, String nombre, String email, Afiliado i, Afiliado d) {
@@ -73,4 +75,13 @@ public class Afiliado {
 	public void setContador(int contador) {
 		this.contador = contador;
 	}
+
+	public Afiliado getSig() {
+		return sig;
+	}
+
+	public void setSig(Afiliado sig) {
+		this.sig = sig;
+	}
+	
 }

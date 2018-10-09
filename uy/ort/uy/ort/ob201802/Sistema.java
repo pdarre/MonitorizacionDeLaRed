@@ -30,7 +30,7 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno registrarAfiliado(String cedula, String nombre, String email) {
-		if (Cedula.checkFormato(cedula) && !Cedula.esCIValida(Cedula.convertirCI(cedula))) {
+		if (!Cedula.checkFormato(cedula) || !Cedula.esCIValida(Cedula.convertirCI(cedula))) {
 			return new Retorno(Resultado.ERROR_1);
 		} else if (!Email.isValid(email)) {
 			return new Retorno(Resultado.ERROR_2);
@@ -46,16 +46,21 @@ public class Sistema implements ISistema {
 	// busqueda
 	@Override
 	public Retorno buscarAfiliado(String CI) {
-		Afiliado a = arbolAfiliados.getAfiliadoByCi(CI);
-		String ret = formatStringBuscarAfiliado(a);
+		if(!Cedula.checkFormato(CI) || !Cedula.esCIValida(Cedula.convertirCI(CI))) {
+			return new Retorno(Resultado.ERROR_1);
+		}
+		//pone el contador en 1 para una nueva busqueda
+		arbolAfiliados.cont = 1;
+		Afiliado a = arbolAfiliados.getAfiliadoByCi(CI);		
 		if (a != null) {
+			String ret = formatStringBuscarAfiliado(a);
 			return new Retorno(Resultado.OK, ret, a.getContador());
 		}
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		return new Retorno(Resultado.ERROR_2);
 	}
 
 	private String formatStringBuscarAfiliado(Afiliado a) {
-		return a.getCedula() + ";" + a.getEmail() + ";" + a.getNombre();
+		return a.getCedula() + ";" + a.getNombre() + ";" + a.getEmail();
 	}
 
 	@Override

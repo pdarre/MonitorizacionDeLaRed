@@ -10,14 +10,6 @@ public class AbbAfiliados {
 		this.raiz = null;
 	}
 
-	public Afiliado getRaiz() {
-		return raiz;
-	}
-
-	public void setRaiz(Afiliado a) {
-		this.raiz = a;
-	}
-
 	public boolean isEmpty() {
 		return (raiz == null);
 	}
@@ -25,31 +17,6 @@ public class AbbAfiliados {
 	public Afiliado getAfiliado(Afiliado afiliado) {
 		// TO DO
 		return null;
-	}
-
-	public int cantNodos(Afiliado nodo) {
-		int cont = 0;
-		if (nodo != null) {
-			cont += cantNodos(nodo.getIzq());
-			cont++;
-			cont += cantNodos(nodo.getDer());
-
-		}
-		return cont;
-	}
-
-	public int obtenerPeso(Afiliado nodo) {
-		int peso = 0;
-		int peso_izq = 0;
-		int peso_der = 0;
-
-		if (nodo != null) {
-			peso_izq = cantNodos(nodo.getIzq());
-			peso_der = cantNodos(nodo.getDer());
-			peso = peso_izq + peso_der;
-
-		}
-		return peso;
 	}
 
 	public Afiliado getAfiliadoByCi(String cedula) {
@@ -75,6 +42,10 @@ public class AbbAfiliados {
 		}
 	}
 
+	public void addAfiliado(Afiliado afiliado) {
+		this.addAfiliado(afiliado, this.raiz);
+	}
+	
 	public void addAfiliado(Afiliado nuevo, Afiliado raiz) {
 		if (raiz == null) {
 			this.setRaiz(nuevo);
@@ -95,15 +66,19 @@ public class AbbAfiliados {
 		}
 	}
 
-	public void addAfiliado(Afiliado afiliado) {
-		this.addAfiliado(afiliado, this.raiz);
-	}
-
 	public int getCont() {
 		return cont;
 	}
 
 	public void setCont(int cont) {
 		this.cont = cont;
+	}
+	
+	public Afiliado getRaiz() {
+		return raiz;
+	}
+
+	public void setRaiz(Afiliado a) {
+		this.raiz = a;
 	}
 }
