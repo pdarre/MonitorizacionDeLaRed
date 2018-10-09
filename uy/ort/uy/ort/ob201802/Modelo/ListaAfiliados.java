@@ -27,4 +27,19 @@ public class ListaAfiliados {
 	public void setRaiz(Afiliado raiz) {
 		this.raiz = raiz;
 	}
+
+	public String listarAfiliados() {
+		if(this.raiz==null)return null;
+		String retorno = "";
+		Afiliado temp = this.raiz;
+		while (temp != null) {
+			if (temp.getSig() == null) {
+				retorno += temp.getCedula() + ";" + temp.getNombre() + ";" + temp.getEmail();
+			}else {
+				retorno += temp.getCedula() + ";" + temp.getNombre() + ";" + temp.getEmail() + "|";
+			}
+			temp = temp.getSig();
+		}
+		return retorno;
+	}
 }

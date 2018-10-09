@@ -65,7 +65,8 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno listarAfiliados() {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		String retorno = arbolAfiliados.listarAfiliados();
+		return new Retorno(Resultado.OK, retorno, 0);
 	}
 
 	@Override
