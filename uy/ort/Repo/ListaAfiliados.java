@@ -1,4 +1,6 @@
-package uy.ort.ob201802.Modelo;
+package Repo;
+
+import uy.ort.ob201802.Modelo.Afiliado;
 
 public class ListaAfiliados {
 

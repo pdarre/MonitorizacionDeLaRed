@@ -1,5 +1,6 @@
-package uy.ort.ob201802.Modelo;
+package Repo;
 
+import uy.ort.ob201802.Modelo.Afiliado;
 import uy.ort.ob201802.Util.Cedula;
 
 public class AbbAfiliados {

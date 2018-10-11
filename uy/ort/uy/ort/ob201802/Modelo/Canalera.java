@@ -1,34 +1,52 @@
 package uy.ort.ob201802.Modelo;
 
-public class Canalera {
+import Repo.IVertice;
+
+public class Canalera implements IVertice {
+
 	private String chipId;
-	private String cIAfiliado;
+	private String ciAfiliado;
 	private double coordX;
 	private double coordY;
-	public String getChipId() {
-		return chipId;
-	}
-	public void setChipId(String chipId) {
-		this.chipId = chipId;
-	}
-	public String getcIAfiliado() {
-		return cIAfiliado;
-	}
-	public void setcIAfiliado(String cIAfiliado) {
-		this.cIAfiliado = cIAfiliado;
-	}
-	public double getCoordX() {
-		return coordX;
-	}
-	public void setCoordX(double coordX) {
+	
+	public Canalera(String chipid, String CIafiliado, Double coordX, Double coordY) {
+		this.chipId = chipid;
+		this.ciAfiliado = CIafiliado;
 		this.coordX = coordX;
-	}
-	public double getCoordY() {
-		return coordY;
-	}
-	public void setCoordY(double coordY) {
 		this.coordY = coordY;
 	}
 	
-	
+	public Canalera() {
+		
+	}
+
+	@Override
+	public String getTipo() {
+		return "canalera";
+	}
+
+	@Override
+	public double getCoordX() {
+		return this.coordX;
+	}
+
+	@Override
+	public double getCoordY() {
+		return this.coordY;
+	}
+
+	@Override
+	public String getChipId() {
+		return this.chipId;
+	}
+
+	@Override
+	public String getCiAfiliado() {
+		return this.ciAfiliado;
+	}
+
+	@Override
+	public String getNodoId() {
+		return null;
+	}
 }

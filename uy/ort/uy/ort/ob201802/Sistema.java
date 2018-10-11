@@ -1,6 +1,7 @@
 package uy.ort.ob201802;
 
-import uy.ort.ob201802.Modelo.AbbAfiliados;
+import Repo.AbbAfiliados;
+import Repo.Grafo;
 import uy.ort.ob201802.Modelo.Afiliado;
 import uy.ort.ob201802.Modelo.Nodo;
 import uy.ort.ob201802.Retorno.Resultado;
@@ -11,6 +12,7 @@ public class Sistema implements ISistema {
 
 	private Nodo servidor;
 	private AbbAfiliados arbolAfiliados;
+	private Grafo grafo;
 
 	@Override
 	public Retorno inicializarSistema(int maxPuntos, Double coordX, Double coordY) {		
@@ -18,6 +20,7 @@ public class Sistema implements ISistema {
 			return new Retorno(Resultado.ERROR_1);
 		} else {
 			arbolAfiliados = new AbbAfiliados();
+			setGrafo(new Grafo(30));
 			return new Retorno(Resultado.OK);
 		}
 	}
@@ -65,8 +68,8 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno listarAfiliados() {
-		String retorno = arbolAfiliados.listarAfiliados();
-		return new Retorno(Resultado.OK, retorno, 0);
+		String lista = arbolAfiliados.listarAfiliados();
+		return new Retorno(Resultado.OK, lista, 0);
 	}
 
 	@Override
@@ -107,6 +110,14 @@ public class Sistema implements ISistema {
 
 	public AbbAfiliados getArbolAfiliados() {
 		return arbolAfiliados;
+	}
+
+	public Grafo getGrafo() {
+		return grafo;
+	}
+
+	public void setGrafo(Grafo grafo) {
+		this.grafo = grafo;
 	}
 
 }
