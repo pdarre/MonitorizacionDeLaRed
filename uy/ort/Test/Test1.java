@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import Repo.HashTableVertices;
 import Repo.IVertice;
 import uy.ort.ob201802.ISistema;
 import uy.ort.ob201802.Retorno;
@@ -15,7 +16,7 @@ import uy.ort.ob201802.Modelo.Nodo;
 class Test1 {
 
 	Sistema sis = new Sistema();
-	
+
 //	@Test
 //	void testInicializarSistemaError() {
 //		assertEquals(sis.inicializarSistema(-1, -34.7599678, -55.7271004).resultado.name(), "ERROR_1");
@@ -56,47 +57,32 @@ class Test1 {
 //		sis.registrarAfiliado("2.356.456-4", "Juan", "juan@juan.com");
 //		assertEquals(sis.listarAfiliados().resultado.name(),"OK");
 //	}
+
 	
-	@Test
-	void test() {		
-		double tempC1 = -34.7599678 + -55.7271004;
-		int tempC3 = (int) tempC1;
-		int positivoC = tempC3 *= -1;
-		int finC = positivoC % 23;
-		
-		double tempD1 = -42.7456678 + -35.7651004;
-		int tempD3 = (int) tempD1;
-		int positivo = tempD3 *= -1;
-		int fin = positivo % 23;
-		
-		double tempE1 = -25.7876678 + -54.7271067;
-		int tempE3 = (int) tempE1;
-		int positivoE = tempE3 *= -1;
-		int finE = positivoE % 23;
-		
-		double tempF1 = -12.7453478 + -46.7698404;
-		int tempF3 = (int) tempF1;
-		int positivoF = tempF3 *= -1;
-		int finF = positivoF % 23;
-		System.out.println();
-	}
-	
+
 	@Test
 	void test2() {
-		Canalera can = new Canalera();
-		Nodo nod = new Nodo();
+		Canalera can = new Canalera("canalera1", "3.341.113-7", -23.45675, -36.44567);
+		Nodo nod = new Nodo("nodo1", -32.45555, -45.65432);
+		
 		IVertice n = nod;
-		IVertice c = can;		
-		
+		IVertice c = can;
+
 		IVertice[] arrayIVertice = new IVertice[20];
-		
+
 		for (int i = 0; i < arrayIVertice.length; i++) {
 			arrayIVertice[i] = null;
 		}
-		arrayIVertice[0] = n;
-		arrayIVertice[1] = c;
+		arrayIVertice[0] = c;
+		arrayIVertice[1] = n;
+		
+//		f
+
+		
+		HashTableVertices ht = new HashTableVertices(20);
 		for (IVertice v : arrayIVertice) {
-			System.out.println(v.getCoordX() + "-" + v.getCoordY() + "-" + v.getTipo() +"-"+v.hashCode()%23+"-"+v.toString());
+			int hash = ht.getHashVertice(v);
+			System.out.println(hash);
 		}
 	}
 }

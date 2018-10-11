@@ -2,7 +2,9 @@ package uy.ort.ob201802;
 
 import Repo.AbbAfiliados;
 import Repo.Grafo;
+import Repo.IVertice;
 import uy.ort.ob201802.Modelo.Afiliado;
+import uy.ort.ob201802.Modelo.Canalera;
 import uy.ort.ob201802.Modelo.Nodo;
 import uy.ort.ob201802.Retorno.Resultado;
 import uy.ort.ob201802.Util.Cedula;
@@ -15,7 +17,7 @@ public class Sistema implements ISistema {
 	private Grafo grafo;
 
 	@Override
-	public Retorno inicializarSistema(int maxPuntos, Double coordX, Double coordY) {		
+	public Retorno inicializarSistema(int maxPuntos, Double coordX, Double coordY) {
 		if (maxPuntos <= 0) {
 			return new Retorno(Resultado.ERROR_1);
 		} else {
@@ -27,7 +29,7 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno destruirSistema() {
-		//arbol, grafo, etc en null
+		// arbol, grafo, etc en null
 		return new Retorno(Resultado.NO_IMPLEMENTADA);
 	}
 
@@ -49,12 +51,12 @@ public class Sistema implements ISistema {
 	// busqueda
 	@Override
 	public Retorno buscarAfiliado(String CI) {
-		if(!Cedula.checkFormato(CI) || !Cedula.esCIValida(Cedula.convertirCI(CI))) {
+		if (!Cedula.checkFormato(CI) || !Cedula.esCIValida(Cedula.convertirCI(CI))) {
 			return new Retorno(Resultado.ERROR_1);
 		}
-		//pone el contador en 1 para una nueva busqueda
+		// pone el contador en 1 para una nueva busqueda
 		arbolAfiliados.cont = 1;
-		Afiliado a = arbolAfiliados.getAfiliadoByCi(CI);		
+		Afiliado a = arbolAfiliados.getAfiliadoByCi(CI);
 		if (a != null) {
 			String ret = formatStringBuscarAfiliado(a);
 			return new Retorno(Resultado.OK, ret, a.getContador());
@@ -74,22 +76,44 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno registrarCanalera(String chipid, String CIafiliado, Double coordX, Double coordY) {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		IVertice vertice = new Canalera(chipid, CIafiliado, coordX, coordY);
+		if (this.grafo.esLlena()) {
+			return new Retorno(Resultado.ERROR_1);
+		} else if (this.grafo.buscarVertice(vertice) != null) {
+			return new Retorno(Resultado.ERROR_2);
+		} else if (this.arbolAfiliados.getAfiliadoByCi(CIafiliado) != null) {
+			return new Retorno(Resultado.ERROR_3);
+		}
+		this.grafo.registrarVertice(vertice);
+		return new Retorno(Resultado.OK);
 	}
 
 	@Override
 	public Retorno registrarNodo(String nodoid, Double coordX, Double coordY) {
+		IVertice vertice = new Nodo(nodoid, coordX, coordY);
+		if (this.grafo.esLlena()) {
+			return new Retorno(Resultado.ERROR_1);
+		} else if (this.grafo.buscarVertice(vertice) != null) {
+			return new Retorno(Resultado.ERROR_2);
+		}
+		this.grafo.registrarVertice(vertice);
 		return new Retorno(Resultado.NO_IMPLEMENTADA);
 	}
 
 	@Override
 	public Retorno registrarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int perdidaCalidad) {
+		IVertice vertice = this.grafo.buscarVerticeXcoordenadas(coordXf, coordYf);
+		if (perdidaCalidad <= 0) {
+			return new Retorno(Resultado.ERROR_1);
+		} else if (this.grafo.buscarVertice(vertice) == null) {
+			return new Retorno(Resultado.ERROR_2);
+		}
+		this.grafo.registrarTramo(coordXi, coordYi, coordXf, coordYf, perdidaCalidad);
 		return new Retorno(Resultado.NO_IMPLEMENTADA);
 	}
 
 	@Override
-	public Retorno modificarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf,
-			int nuevoValorPerdidaCalidad) {
+	public Retorno modificarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int nuevoValorPerdidaCalidad) {
 		return new Retorno(Resultado.NO_IMPLEMENTADA);
 	}
 

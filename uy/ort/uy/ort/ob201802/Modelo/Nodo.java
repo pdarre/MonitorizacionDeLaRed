@@ -8,7 +8,7 @@ public class Nodo implements IVertice{
 	private double coordX;
 	private double coordY;
 
-	public Nodo(String nodoId, double coordX, double coordY, String tipoNodo) {
+	public Nodo(String nodoId, double coordX, double coordY) {
 		this.nodoId = nodoId;
 		this.coordX = coordX;
 		this.coordY = coordY;

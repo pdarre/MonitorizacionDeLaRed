@@ -1,30 +1,52 @@
 package Repo;
 
+import uy.ort.ob201802.Modelo.Nodo;
+
 public class Grafo {
 
-	HashTableVertices vertices;
-	int[][] matrizAdy;
+	private HashTableVertices vertices;
+	private int[][] matrizAdy;
+	private int contador;
+	private int tam;
 
 	public Grafo(int tam) {
-		vertices = new HashTableVertices(tam);
-		matrizAdy = new int[vertices.getSize()][vertices.getSize()];
+		this.contador = 0;
+		this.tam = tam;
+		this.vertices = new HashTableVertices(tam);
+		this.matrizAdy = new int[vertices.getSize()][vertices.getSize()];
 		iniciarMatriz();
 	}
 
-	// inicia en 0 todos los valores de la matrizAdy
 	public void iniciarMatriz() {
-		int largo = matrizAdy.length;
-		for (int i = 0; i < largo; i++) {
-			for (int j = 0; j < largo; j++) {
+		for (int i = 0; i < matrizAdy.length; i++) {
+			for (int j = 0; j < matrizAdy.length; j++) {
 				matrizAdy[i][j] = 0;
 			}
 		}
 	}
-	
-	public int calcularLugarEnArrayVertices(double coordX, double coordY) {
-		double sumaCoordenadas = coordX + coordY;
-		int sumaInt = (int) sumaCoordenadas;
-		int positivo = sumaInt *= -1;
-		return positivo % 23;
+
+	public void registrarVertice(IVertice vertice) {
+		vertices.registrarVertice(vertice);
+		contador++;
 	}
+	
+	public IVertice buscarVertice(IVertice vertice) {
+		return vertices.buscarVertice(vertice);
+	}
+
+	public boolean esLlena() {
+		return contador == tam;
+	}
+
+	public IVertice buscarVerticeXcoordenadas(Double coordXf, Double coordYf) {
+		return vertices.buscarVerticeXcoordenadas(coordXf,coordYf);
+	}
+
+	public void registrarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int perdidaCalidad) {
+		int verticeOrigen = vertices.getHashVerticeXcoordenadas(coordXi, coordYi);
+		int verticeDestino = vertices.getHashVerticeXcoordenadas(coordXf, coordYf);
+		this.matrizAdy[verticeOrigen][verticeDestino] = perdidaCalidad;
+		this.matrizAdy[verticeDestino][verticeOrigen] = perdidaCalidad;		
+	}
+	
 }

@@ -1,5 +1,7 @@
 package Repo;
 
+import uy.ort.ob201802.Modelo.Nodo;
+
 public class HashTableVertices {
 
 	private IVertice[] arrayVertices;
@@ -71,7 +73,6 @@ public class HashTableVertices {
 	// retorna el Nodo si lo encentra en el arrayVertices, si no lo encuentra
 	// retorna null
 	public IVertice buscarVertice(IVertice vertice) {
-		IVertice vert = null;
 		int lugar = getHashVertice(vertice);
 		while (arrayVertices[lugar] != null && !arrayVertices[lugar].equals(vertice)) {
 			lugar++;
@@ -81,5 +82,21 @@ public class HashTableVertices {
 
 	public int getSize() {
 		return size;
+	}
+
+	public void registrarVertice(IVertice vertice) {
+		arrayVertices[getLugarEnArrayVertice(vertice)] = vertice;
+	}
+
+	public IVertice buscarVerticeXcoordenadas(Double coordXf, Double coordYf) {
+		IVertice vertice = this.arrayVertices[getHashVerticeXcoordenadas(coordXf,coordYf)]; 
+		return vertice;
+	}
+	
+	public int getHashVerticeXcoordenadas(Double coordXf, Double coordYf) {
+		double sumaCoord = coordXf + coordYf;
+		int castSuma = (int) sumaCoord;
+		int positivo = castSuma *= -1;
+		return positivo % this.size;
 	}
 }
