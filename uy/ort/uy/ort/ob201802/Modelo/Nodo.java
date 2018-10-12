@@ -7,6 +7,7 @@ public class Nodo implements IVertice{
 	private String nodoId;
 	private double coordX;
 	private double coordY;
+	private IVertice siguiente;
 
 	public Nodo(String nodoId, double coordX, double coordY) {
 		this.nodoId = nodoId;
@@ -45,5 +46,15 @@ public class Nodo implements IVertice{
 	@Override
 	public String getCiAfiliado() {
 		return null;
+	}
+
+	@Override
+	public IVertice getSiguiente() {
+		return this.siguiente;
+	}
+
+	@Override
+	public void setSiguiente(IVertice v) {
+		this.siguiente = v;
 	}
 }

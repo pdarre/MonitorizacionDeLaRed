@@ -23,8 +23,14 @@ public class Sistema implements ISistema {
 		} else {
 			this.arbolAfiliados = new AbbAfiliados();
 			this.grafo = new Grafo(maxPuntos);
+			registrarServidorCentral(coordX, coordY);
 			return new Retorno(Resultado.OK);
 		}
+	}
+
+	private void registrarServidorCentral(Double coordX, Double coordY) {
+		IVertice vertice = new Nodo("servidor", coordX, coordY);
+		this.grafo.registrarVertice(vertice);
 	}
 
 	@Override
@@ -98,13 +104,27 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno registrarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int perdidaCalidad) {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		if(perdidaCalidad <= 0) {
+			return new Retorno(Resultado.ERROR_1);
+		}else if(this.grafo.buscarVertice(coordXi, coordYi) == null || this.grafo.buscarVertice(coordXf, coordYf) == null) {
+			return new Retorno(Resultado.ERROR_2);
+		}else if(this.grafo.existeTramo(coordXi, coordYi,coordXf, coordYf)){
+			return new Retorno(Resultado.ERROR_3);
+		}
+		this.grafo.registrarTramo(coordXi, coordYi, coordXf, coordYf, perdidaCalidad);
+		return new Retorno(Resultado.OK);
 	}
 
 	@Override
 	public Retorno modificarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf,
 			int nuevoValorPerdidaCalidad) {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		if(nuevoValorPerdidaCalidad <= 0) {
+			return new Retorno(Resultado.ERROR_1);
+		}else if(!this.grafo.existeTramo(coordXi, coordYi,coordXf, coordYf)){
+			return new Retorno(Resultado.ERROR_2);
+		}
+		this.grafo.modificarTramo(coordXi, coordYi, coordXf, coordYf, nuevoValorPerdidaCalidad);
+		return new Retorno(Resultado.OK);
 	}
 
 	@Override
@@ -133,5 +153,4 @@ public class Sistema implements ISistema {
 	public void setGrafo(Grafo grafo) {
 		this.grafo = grafo;
 	}
-
 }

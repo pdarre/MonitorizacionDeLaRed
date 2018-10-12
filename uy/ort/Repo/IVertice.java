@@ -13,4 +13,8 @@ public interface IVertice {
 	public String getCiAfiliado();
 
 	public String getNodoId();
+	
+	public IVertice getSiguiente();
+	
+	public void setSiguiente(IVertice v);
 }

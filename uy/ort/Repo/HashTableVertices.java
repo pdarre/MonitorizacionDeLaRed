@@ -37,11 +37,7 @@ public class HashTableVertices {
 		}
 		return primo;
 	}
-
-	public Object buscarVerticeXindice(int indice) {
-		return arrayVertices[indice];
-	}
-
+	
 	public int buscarIndiceVertice(String nodoId) {
 		for (int i = 0; i < size; i++) {
 			if (arrayVertices[i] != null && arrayVertices[i].getNodoId().equals(nodoId)) {
@@ -65,7 +61,7 @@ public class HashTableVertices {
 	public int getLugarEnArrayVertice(IVertice vertice) {
 		int lugar = getHashVertice(vertice.getCoordX(), vertice.getCoordY());
 		while (arrayVertices[lugar] != null) {
-			if (lugar == this.size-1 && arrayVertices[size - 1] != null) {
+			if (lugar == this.size - 1 && arrayVertices[size - 1] != null) {
 				lugar = 0;
 				while (arrayVertices[lugar] == null) {
 					return lugar;
@@ -98,20 +94,33 @@ public class HashTableVertices {
 		arrayVertices[lugar] = vertice;
 	}
 
-	public IVertice buscarVerticeXcoordenadas(Double coordXf, Double coordYf) {
-		IVertice vertice = this.arrayVertices[getHashVerticeXcoordenadas(coordXf, coordYf)];
-		return vertice;
+	public int buscarHashVertice(Double coordX, Double coordY) {
+		for (int i = 0; i < arrayVertices.length; i++) {
+			if (arrayVertices[i] != null) {
+				if (arrayVertices[i].getCoordX() == coordX && arrayVertices[i].getCoordY() == coordY) {
+					return i;
+				}
+			}
+		}
+		return -1;
 	}
-
-	public int getHashVerticeXcoordenadas(Double coordXf, Double coordYf) {
-		double sumaCoord = coordXf + coordYf;
-		int castSuma = (int) sumaCoord;
-		int positivo = castSuma *= -1;
-		return positivo % this.size;
+	
+	public IVertice buscarVerticeXindice(int indice) {
+		return arrayVertices[indice];
 	}
-
-	// solo para pruebas
-	public IVertice[] getArregloVertices() {
+	
+	//pruebas
+	public IVertice[] getVertices() {
 		return this.arrayVertices;
+	}
+
+	public int buscarIndicePalabra(double coordX, double coordY) {
+		for(int i = 0; i < size;i++) {
+			if(arrayVertices[i] != null && arrayVertices[i].getCoordX() == coordX && arrayVertices[i].getCoordY() == coordY) {
+				if(arrayVertices[i+1]==null) return 0;
+				return i;
+			}
+		}
+		return 0;
 	}
 }

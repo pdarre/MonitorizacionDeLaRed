@@ -38,13 +38,9 @@ public class Grafo {
 		return contador == this.getHashTableVertices().getSize();
 	}
 
-	public IVertice buscarVerticeXcoordenadas(Double coordXf, Double coordYf) {
-		return vertices.buscarVerticeXcoordenadas(coordXf, coordYf);
-	}
-
 	public void registrarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int perdidaCalidad) {
-		int verticeOrigen = vertices.getHashVerticeXcoordenadas(coordXi, coordYi);
-		int verticeDestino = vertices.getHashVerticeXcoordenadas(coordXf, coordYf);
+		int verticeOrigen = vertices.buscarHashVertice(coordXi, coordYi);
+		int verticeDestino = vertices.buscarHashVertice(coordXf, coordYf);
 		this.matrizAdy[verticeOrigen][verticeDestino] = perdidaCalidad;
 		this.matrizAdy[verticeDestino][verticeOrigen] = perdidaCalidad;
 	}
@@ -52,5 +48,50 @@ public class Grafo {
 	// solo para las pruebas
 	public HashTableVertices getHashTableVertices() {
 		return this.vertices;
+	}
+
+	public boolean existeTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf) {
+		int origen = this.vertices.buscarHashVertice(coordXi, coordYi);
+		int destino = this.vertices.buscarHashVertice(coordXf, coordYf);
+		return this.matrizAdy[origen][destino] != 0;
+	}
+
+	public void modificarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf,
+			int nuevoValorPerdidaCalidad) {
+		int verticeOrigen = vertices.buscarHashVertice(coordXi, coordYi);
+		int verticeDestino = vertices.buscarHashVertice(coordXf, coordYf);
+		this.matrizAdy[verticeOrigen][verticeDestino] = nuevoValorPerdidaCalidad;
+		this.matrizAdy[verticeDestino][verticeOrigen] = nuevoValorPerdidaCalidad;
+	}
+
+	// recibe un vertice y retorna ua lista con los vertices adyacentes
+	public ListaVertices buscarAdyacentes(IVertice vertice) {
+		ListaVertices retorno = new ListaVertices();
+		int indiceVerticeOrigen = vertices.buscarIndicePalabra(vertice.getCoordX(), vertice.getCoordY());
+		for (int i = 0; i < matrizAdy.length; i++) {
+			if (matrizAdy[indiceVerticeOrigen][i] != 0) {
+				IVertice temp = vertices.buscarVerticeXindice(i);
+				retorno.insertarVertice(temp);
+			}
+		}
+		return retorno;
+	}
+
+	public int getSize() {
+		return vertices.getSize();
+	}
+
+	// para pruebas
+	public int[][] getMatriz() {
+		return this.matrizAdy;
+	}
+
+	public IVertice[] getVertices() {
+		return vertices.getVertices();
+	}
+
+	public int buscarIndicePalabra(double coordX, double coordY) {
+		int indice = vertices.buscarIndicePalabra(coordX, coordY);
+		return indice;
 	}
 }
