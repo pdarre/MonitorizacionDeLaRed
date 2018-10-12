@@ -16,16 +16,9 @@ public class AbbAfiliados {
 		return (raiz == null);
 	}
 
-	public Afiliado getAfiliado(Afiliado afiliado) {
-		// TO DO
-		return null;
-	}
-
 	public Afiliado getAfiliadoByCi(String cedula) {
 		return getAfiliadoByCi(cedula, this.raiz);
 	}
-
-	public int cont = 1;
 
 	public Afiliado getAfiliadoByCi(String cedula, Afiliado afiliado) {
 		int ci = Cedula.convertirCI(cedula);
@@ -33,13 +26,10 @@ public class AbbAfiliados {
 			return null;
 		} else {
 			if (ci == Cedula.convertirCI(afiliado.getCedula())) {
-				afiliado.setContador(cont);
 				return afiliado;
 			} else if (ci < Cedula.convertirCI(afiliado.getCedula())) {
-				cont++;
 				return getAfiliadoByCi(cedula, afiliado.getIzq());
 			} else {
-				cont++;
 				return getAfiliadoByCi(cedula, afiliado.getDer());
 			}
 		}
@@ -72,7 +62,7 @@ public class AbbAfiliados {
 	public ListaAfiliados crearlistAfiliados() {
 		this.listaAfiliados = new ListaAfiliados();
 		crearlistAfiliados(this.raiz);
-	    return this.listaAfiliados;
+		return this.listaAfiliados;
 	}
 
 	public void crearlistAfiliados(Afiliado afiliado) {
@@ -82,18 +72,10 @@ public class AbbAfiliados {
 			crearlistAfiliados(afiliado.getDer());
 		}
 	}
-	
+
 	public String listarAfiliados() {
 		crearlistAfiliados();
 		return listaAfiliados.listarAfiliados();
-	}
-
-	public int getCont() {
-		return cont;
-	}
-
-	public void setCont(int cont) {
-		this.cont = cont;
 	}
 
 	public Afiliado getRaiz() {
@@ -102,5 +84,25 @@ public class AbbAfiliados {
 
 	public void setRaiz(Afiliado a) {
 		this.raiz = a;
+	}
+
+	public int getNivelAfiliado(String cedula) {
+		return getNivelAfiliado(cedula, this.raiz);
+	}
+
+	
+	public int getNivelAfiliado(String cedula, Afiliado afiliado) {
+		int cont = 1;
+		if (afiliado == null) {
+			return cont;
+		} else {
+			if (cedula == afiliado.getCedula()) {
+				return cont;
+			} else if (Cedula.convertirCI(cedula) < Cedula.convertirCI(afiliado.getCedula())) {
+				return cont + getNivelAfiliado(cedula, afiliado.getIzq());
+			} else {
+				return cont + getNivelAfiliado(cedula, afiliado.getDer());
+			}
+		}
 	}
 }

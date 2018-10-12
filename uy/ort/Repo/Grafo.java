@@ -29,24 +29,28 @@ public class Grafo {
 		vertices.registrarVertice(vertice);
 		contador++;
 	}
-	
-	public IVertice buscarVertice(IVertice vertice) {
-		return vertices.buscarVertice(vertice);
+
+	public IVertice buscarVertice(Double coordX, Double coordY) {
+		return vertices.buscarVertice(coordX, coordY);
 	}
 
-	public boolean esLlena() {
-		return contador == tam;
+	public boolean arregloHashLleno() {
+		return contador == this.getHashTableVertices().getSize();
 	}
 
 	public IVertice buscarVerticeXcoordenadas(Double coordXf, Double coordYf) {
-		return vertices.buscarVerticeXcoordenadas(coordXf,coordYf);
+		return vertices.buscarVerticeXcoordenadas(coordXf, coordYf);
 	}
 
 	public void registrarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int perdidaCalidad) {
 		int verticeOrigen = vertices.getHashVerticeXcoordenadas(coordXi, coordYi);
 		int verticeDestino = vertices.getHashVerticeXcoordenadas(coordXf, coordYf);
 		this.matrizAdy[verticeOrigen][verticeDestino] = perdidaCalidad;
-		this.matrizAdy[verticeDestino][verticeOrigen] = perdidaCalidad;		
+		this.matrizAdy[verticeDestino][verticeOrigen] = perdidaCalidad;
 	}
-	
+
+	// solo para las pruebas
+	public HashTableVertices getHashTableVertices() {
+		return this.vertices;
+	}
 }

@@ -54,8 +54,8 @@ public class HashTableVertices {
 	// suma coordX + coordY
 	// castea double de la suma a int
 	// pasa a int positivo el casteo
-	public int getHashVertice(IVertice vertice) {
-		double sumaCoord = vertice.getCoordX() + vertice.getCoordY();
+	public int getHashVertice(double coordX, double coordY) {
+		double sumaCoord = coordX + coordY;
 		int castSuma = (int) sumaCoord;
 		int positivo = castSuma *= -1;
 		return positivo % this.size;
@@ -63,8 +63,14 @@ public class HashTableVertices {
 
 	// busca el primer lugar libre en el arrayVertices a partir del indice generado
 	public int getLugarEnArrayVertice(IVertice vertice) {
-		int lugar = getHashVertice(vertice);
-		while (!arrayVertices[lugar].equals(vertice)) {
+		int lugar = getHashVertice(vertice.getCoordX(), vertice.getCoordY());
+		while (arrayVertices[lugar] != null) {
+			if (lugar == this.size-1 && arrayVertices[size - 1] != null) {
+				lugar = 0;
+				while (arrayVertices[lugar] == null) {
+					return lugar;
+				}
+			}
 			lugar++;
 		}
 		return lugar;
@@ -72,12 +78,15 @@ public class HashTableVertices {
 
 	// retorna el Nodo si lo encentra en el arrayVertices, si no lo encuentra
 	// retorna null
-	public IVertice buscarVertice(IVertice vertice) {
-		int lugar = getHashVertice(vertice);
-		while (arrayVertices[lugar] != null && !arrayVertices[lugar].equals(vertice)) {
-			lugar++;
+	public IVertice buscarVertice(double coordX, double coordY) {
+		for (int i = 0; i < arrayVertices.length; i++) {
+			if (arrayVertices[i] != null) {
+				if (arrayVertices[i].getCoordX() == coordX && arrayVertices[i].getCoordY() == coordY) {
+					return arrayVertices[i];
+				}
+			}
 		}
-		return arrayVertices[lugar];
+		return null;
 	}
 
 	public int getSize() {
@@ -85,18 +94,24 @@ public class HashTableVertices {
 	}
 
 	public void registrarVertice(IVertice vertice) {
-		arrayVertices[getLugarEnArrayVertice(vertice)] = vertice;
+		int lugar = getLugarEnArrayVertice(vertice);
+		arrayVertices[lugar] = vertice;
 	}
 
 	public IVertice buscarVerticeXcoordenadas(Double coordXf, Double coordYf) {
-		IVertice vertice = this.arrayVertices[getHashVerticeXcoordenadas(coordXf,coordYf)]; 
+		IVertice vertice = this.arrayVertices[getHashVerticeXcoordenadas(coordXf, coordYf)];
 		return vertice;
 	}
-	
+
 	public int getHashVerticeXcoordenadas(Double coordXf, Double coordYf) {
 		double sumaCoord = coordXf + coordYf;
 		int castSuma = (int) sumaCoord;
 		int positivo = castSuma *= -1;
 		return positivo % this.size;
+	}
+
+	// solo para pruebas
+	public IVertice[] getArregloVertices() {
+		return this.arrayVertices;
 	}
 }
