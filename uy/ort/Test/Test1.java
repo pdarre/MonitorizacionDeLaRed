@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import uy.ort.ob201802.Retorno;
 import uy.ort.ob201802.Sistema;
+import uy.ort.ob201802.Modelo.Canalera;
+import uy.ort.ob201802.Modelo.Nodo;
+import uy.ort.ob201802.Modelo.Vertice;
 
 class Test1 {
 
@@ -54,11 +57,11 @@ class Test1 {
 		sis.registrarAfiliado("3.333.333-3", "Pablo", "pablo@pablo.com");
 		sis.registrarAfiliado("1.111.111-1", "Jose", "jose@jose.com");
 		sis.registrarAfiliado("2.222.222-2", "Juan", "juan@juan.com");
-		
-		Retorno ret = sis.listarAfiliados();		
+
+		Retorno ret = sis.listarAfiliados();
 		String res = "1.111.111-1;Jose;jose@jose.com|2.222.222-2;Juan;juan@juan.com|3.333.333-3;Pablo;pablo@pablo.com";
-		assertEquals(ret.valorString , res);
-		assertEquals(ret.resultado.name() , "OK");
+		assertEquals(ret.valorString, res);
+		assertEquals(ret.resultado.name(), "OK");
 	}
 
 	@Test
@@ -68,11 +71,11 @@ class Test1 {
 		assertEquals(sis.registrarNodo("nodo1", -24.7593868, -51.3865004).resultado.name(), "OK");
 		assertEquals(sis.registrarNodo("nodo2", -30.7593868, -51.3865004).resultado.name(), "OK");
 		assertEquals(sis.registrarNodo("nodo3", -59.7593868, -51.3865004).resultado.name(), "OK");
-		
+
 		// ERROR_2 ya se encuentra la ubicacion registrada
 		assertEquals(sis.registrarNodo("nodo2", -30.7593868, -51.3865004).resultado.name(), "ERROR_2");
 		assertEquals(sis.registrarNodo("nodo4", -61.7593868, -51.3865004).resultado.name(), "OK");
-		
+
 		// ERROR_1 no hay mas lugar en el arreglo
 		assertEquals(sis.registrarNodo("nodo6", -38.7593868, -12.3865004).resultado.name(), "ERROR_1");
 	}
@@ -90,52 +93,75 @@ class Test1 {
 		assertEquals(sis.registrarCanalera("chip2", "2.222.222-2", -59.7593868, -51.3865004).resultado.name(), "OK");
 		assertEquals(sis.registrarCanalera("chip3", "3.333.333-3", -61.7593868, -51.3865004).resultado.name(), "OK");
 		assertEquals(sis.registrarCanalera("chip4", "4.444.444-4", -20.7593868, -40.3865004).resultado.name(), "OK");
-		
+
 		// ERROR_1 no hay mas lugar en el arreglo
-		assertEquals(sis.registrarCanalera("chip5", "5.555.555-5", -12.7593868, -51.3865004).resultado.name(), "ERROR_1");
+		assertEquals(sis.registrarCanalera("chip5", "5.555.555-5", -12.7593868, -51.3865004).resultado.name(),
+				"ERROR_1");
 	}
 
 	@Test
 	void registrarTramo() {
-		sis.inicializarSistema(5, -34.7599678, -55.7271004);
+		sis.inicializarSistema(20, -34.7599678, -55.7271004);
 		assertEquals(sis.registrarNodo("nodo1", -24.7593868, -51.3865004).resultado.name(), "OK");
 		assertEquals(sis.registrarNodo("nodo2", -30.7593868, -51.3865004).resultado.name(), "OK");
 		assertEquals(sis.registrarNodo("nodo3", -59.7593868, -51.3865004).resultado.name(), "OK");
 		assertEquals(sis.registrarNodo("nodo4", -61.7593868, -51.3865004).resultado.name(), "OK");
 		assertEquals(sis.registrarNodo("nodo5", -12.7593868, -51.3865004).resultado.name(), "OK");
+		assertEquals(sis.registrarAfiliado("1.111.111-1", "Juan", "juan@juan.com").resultado.name(), "OK");
+		assertEquals(sis.registrarCanalera("Canalera-1", "1.111.111-1", -14.7593868, -28.3865004).resultado.name(), "OK");
 
 		// servidor - nodo1
 		assertEquals(sis.registrarTramo(-34.7599678, -55.7271004, -24.7593868, -51.3865004, 20).resultado.name(), "OK");
 		// nodo1 - nodo2
-		sis.registrarTramo(-24.7593868, -51.3865004, -30.7593868, -51.3865004, 10);
+		assertEquals(sis.registrarTramo(-24.7593868, -51.3865004, -30.7593868, -51.3865004, 10).resultado.name(), "OK");
 		// nodo2 - nodo3
-		sis.registrarTramo(-30.7593868, -51.3865004, -59.7593868, -51.3865004, 30);
+		assertEquals(sis.registrarTramo(-30.7593868, -51.3865004, -59.7593868, -51.3865004, 30).resultado.name(), "OK");
 		// nodo 3 - nodo1
-		sis.registrarTramo(-59.7593868, -51.3865004, -24.7593868, -51.3865004, 5);
+		assertEquals(sis.registrarTramo(-59.7593868, -51.3865004, -24.7593868, -51.3865004, 5).resultado.name(), "OK");
 		// nodo3 - nodo4
-		sis.registrarTramo(-59.7593868, -51.3865004, -61.7593868, -51.3865004, 8);
+		assertEquals(sis.registrarTramo(-59.7593868, -51.3865004, -61.7593868, -51.3865004, 8).resultado.name(), "OK");
 		// nodo3 - nodo5
-		sis.registrarTramo(-59.7593868, -51.3865004, -12.7593868, -51.3865004, 6);
+		assertEquals(sis.registrarTramo(-59.7593868, -51.3865004, -12.7593868, -51.3865004, 6).resultado.name(), "OK");
 		printMatriz(sis.getGrafo().getMatriz());
 		
+		//intenta registrar un tramo con perdida de calidad 0
+		assertEquals(sis.registrarTramo(-30.7593868, -51.3865004, -59.7593868, -51.3865004, 0).resultado.name(), "ERROR_1");
+		
+		//intenta registrar un tramo donde no existen las coordenadas origen
+	    assertEquals(sis.registrarTramo(-57.8883868, -34.8888004, -30.7593868, -51.3865004, 40).resultado.name(), "ERROR_2");
+		
+	  //intenta registrar un tramo donde no existen las coordenadas destino
+	    assertEquals(sis.registrarTramo(-30.7593868, -51.3865004, -22.7444868, -51.3865004, 40).resultado.name(), "ERROR_2");
+	    
+	    //intenta registrar un tramo ya existente
+	    assertEquals(sis.registrarTramo(-59.7593868, -51.3865004, -24.7593868, -51.3865004, 5).resultado.name(), "ERROR_3");
+	    
+		//intenta agregar un tramo entre servidor y una canalera
+		assertEquals(sis.registrarTramo(-34.7599678, -55.7271004, -14.7593868, -28.3865004, 50).resultado.name(), "ERROR_4");
+
 		// modificar nodo3 - nodo4
-		sis.modificarTramo(-59.7593868, -51.3865004, -61.7593868, -51.3865004, 14);		
+		assertEquals(sis.modificarTramo(-59.7593868, -51.3865004, -61.7593868, -51.3865004, 14).resultado.name(), "OK");		
 		printMatriz(sis.getGrafo().getMatriz());
 		
 		// modificar nodo4 -nodo3
-		sis.modificarTramo(-61.7593868, -51.3865004, -59.7593868, -51.3865004, 2);		
+		assertEquals(sis.modificarTramo(-61.7593868, -51.3865004, -59.7593868, -51.3865004, 2).resultado.name(), "OK");		
 		printMatriz(sis.getGrafo().getMatriz());	
 		
-		System.out.println();
+		//intenta modificar un tramo con perdida de calidad 0
+		assertEquals(sis.modificarTramo(-61.7593868, -51.3865004, -59.7593868, -51.3865004, 0).resultado.name(), "ERROR_1");
+		
+		//intenta modificar un tramo donde no existen las coordenadas origen
+		assertEquals(sis.modificarTramo(-12.7593868, -51.3865004, -24.7593868, -51.3865004, 80).resultado.name(), "ERROR_2");
+
+		//solo para pruebas, BORRAR!!!
+		printArray(sis.getGrafo().getHashTableVertices().getVertices());
 	}
-	
-	
-	
-	
-	
+
+	//BORRAR!!!
 	public void printMatriz(int[][] matriz) {
-		for (int i = 0; i < sis.getGrafo().getMatriz().length - 1; i++) {
-			for (int j = 0; j < sis.getGrafo().getMatriz().length - 1; j++) {
+		int largo = sis.getGrafo().getMatriz().length;
+		for (int i = 0; i < largo; i++) {
+			for (int j = 0; j < largo; j++) {
 				int valor = sis.getGrafo().getMatriz()[i][j];
 				if (valor != 0) {
 					System.out.print("{" + i + "}");
@@ -147,4 +173,14 @@ class Test1 {
 		}
 		System.out.println();
 	}
+
+	//BORRAR!!!
+	public void printArray(Vertice[] v) {
+		for (int i = 0; i < v.length; i++) {
+			if (v[i] != null) {
+				System.out.println(v[i].getVerticeId() + "-" + i);
+			}
+		}
+	}
+
 }

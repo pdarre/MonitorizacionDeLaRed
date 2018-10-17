@@ -1,6 +1,6 @@
 package uy.ort.ob201802.Modelo;
 
-import Estructuras.IVertice;
+import uy.ort.ob201802.EDD.IVertice;
 
 public class Canalera extends Vertice {
 
@@ -21,16 +21,13 @@ public class Canalera extends Vertice {
 		
 	}
 
-	public String getChipId() {
+	@Override
+	public String getVerticeId() {
 		return this.chipId;
 	}
 
 	public String getCiAfiliado() {
 		return this.ciAfiliado;
-	}
-
-	public String getNodoId() {
-		return null;
 	}
 	
 	@Override

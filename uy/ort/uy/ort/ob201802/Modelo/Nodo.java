@@ -1,6 +1,6 @@
 package uy.ort.ob201802.Modelo;
 
-import Estructuras.IVertice;
+import uy.ort.ob201802.EDD.IVertice;
 
 public class Nodo extends Vertice{
 
@@ -19,13 +19,10 @@ public class Nodo extends Vertice{
 	}
 	
 	@Override
-	public String getNodoId() {
+	public String getVerticeId() {
 		return this.nodoId;
 	}
 
-	public String getChipId() {
-		return null;
-	}
 	@Override
 	public double getCoordY() {
 		return this.coordY;

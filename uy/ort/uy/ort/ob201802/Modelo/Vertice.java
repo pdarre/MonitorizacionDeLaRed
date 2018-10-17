@@ -1,6 +1,6 @@
 package uy.ort.ob201802.Modelo;
 
-import Estructuras.IVertice;
+import uy.ort.ob201802.EDD.IVertice;
 
 public class Vertice implements IVertice {
 
@@ -30,7 +30,8 @@ public class Vertice implements IVertice {
 		return null;
 	}
 
-	public String getNodoId() {
+	@Override
+	public String getVerticeId() {
 		// TODO Auto-generated method stub
 		return null;
 	}

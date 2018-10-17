@@ -1,8 +1,8 @@
 package uy.ort.ob201802;
 
-import Estructuras.AbbAfiliados;
-import Estructuras.Grafo;
-import Estructuras.IVertice;
+import uy.ort.ob201802.EDD.AbbAfiliados;
+import uy.ort.ob201802.EDD.Grafo;
+import uy.ort.ob201802.EDD.IVertice;
 import uy.ort.ob201802.Modelo.Afiliado;
 import uy.ort.ob201802.Modelo.Canalera;
 import uy.ort.ob201802.Modelo.Nodo;
@@ -24,14 +24,9 @@ public class Sistema implements ISistema {
 		} else {
 			this.arbolAfiliados = new AbbAfiliados();
 			this.grafo = new Grafo(maxPuntos);
-			registrarServidorCentral(coordX, coordY);
+			this.registrarNodo("Servidor", coordX, coordY);
 			return new Retorno(Resultado.OK);
 		}
-	}
-
-	private void registrarServidorCentral(Double coordX, Double coordY) {
-		Vertice vertice = new Nodo("servidor", coordX, coordY);
-		this.grafo.registrarVertice(vertice);
 	}
 
 	@Override
@@ -113,6 +108,8 @@ public class Sistema implements ISistema {
 			return new Retorno(Resultado.ERROR_2);
 		}else if(this.grafo.existeTramo(coordXi, coordYi,coordXf, coordYf)){
 			return new Retorno(Resultado.ERROR_3);
+		}else if(this.grafo.tramoIsValid(coordXi, coordYi,coordXf, coordYf)) {
+			return new Retorno(Resultado.ERROR_4);
 		}
 		this.grafo.registrarTramo(coordXi, coordYi, coordXf, coordYf, perdidaCalidad);
 		return new Retorno(Resultado.OK);

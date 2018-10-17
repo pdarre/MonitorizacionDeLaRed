@@ -1,5 +1,6 @@
-package Estructuras;
+package uy.ort.ob201802.EDD;
 
+import uy.ort.ob201802.Modelo.Canalera;
 import uy.ort.ob201802.Modelo.Vertice;
 
 public class Grafo {
@@ -102,5 +103,20 @@ public class Grafo {
 			return true;
 		}
 		return false;
+	}
+
+	public boolean tramoIsValid(Double coordXi, Double coordYi, Double coordXf, Double coordYf) {
+		Vertice origen = this.buscarVertice(coordXi, coordYi);
+		Vertice destino = this.buscarVertice(coordXf, coordYf);	
+		if(origen.getVerticeId() == "Servidor" && destino instanceof Canalera) {
+			return true;			
+		}else if(origen instanceof Canalera && destino.getVerticeId() == "Servidor") {
+			return true;
+		}
+		return false;
+	}
+	
+	public String getVerticeId(double coordX, double coordY) {
+		return this.buscarVertice(coordX, coordY).getVerticeId();
 	}
 }

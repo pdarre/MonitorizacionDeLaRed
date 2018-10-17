@@ -1,4 +1,4 @@
-package Estructuras;
+package uy.ort.ob201802.EDD;
 
 import uy.ort.ob201802.Modelo.Nodo;
 import uy.ort.ob201802.Modelo.Vertice;
@@ -42,7 +42,7 @@ public class HashTableVertices {
 	
 	public int buscarIndiceVertice(String nodoId) {
 		for (int i = 0; i < size; i++) {
-			if (arrayVertices[i] != null && arrayVertices[i].getNodoId() == nodoId) {
+			if (arrayVertices[i] != null && arrayVertices[i].getVerticeId() == nodoId) {
 				return i;
 			}
 		}

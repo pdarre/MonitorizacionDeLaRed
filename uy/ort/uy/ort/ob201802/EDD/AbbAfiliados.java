@@ -1,4 +1,4 @@
-package Estructuras;
+package uy.ort.ob201802.EDD;
 
 import uy.ort.ob201802.Modelo.Afiliado;
 import uy.ort.ob201802.Utilidades.Cedula;

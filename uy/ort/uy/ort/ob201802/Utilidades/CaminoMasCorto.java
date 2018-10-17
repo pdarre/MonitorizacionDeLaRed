@@ -1,8 +1,9 @@
 package uy.ort.ob201802.Utilidades;
 
 import java.util.ArrayList;
-import Estructuras.Grafo;
-import Estructuras.IVertice;
+
+import uy.ort.ob201802.EDD.Grafo;
+import uy.ort.ob201802.EDD.IVertice;
 
 public class CaminoMasCorto {
 
