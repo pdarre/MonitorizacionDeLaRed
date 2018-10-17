@@ -6,6 +6,7 @@ import uy.ort.ob201802.EDD.IVertice;
 import uy.ort.ob201802.Modelo.Afiliado;
 import uy.ort.ob201802.Modelo.Canalera;
 import uy.ort.ob201802.Modelo.Nodo;
+import uy.ort.ob201802.Modelo.Servidor;
 import uy.ort.ob201802.Modelo.Vertice;
 import uy.ort.ob201802.Retorno.Resultado;
 import uy.ort.ob201802.Utilidades.Cedula;
@@ -24,9 +25,13 @@ public class Sistema implements ISistema {
 		} else {
 			this.arbolAfiliados = new AbbAfiliados();
 			this.grafo = new Grafo(maxPuntos);
-			this.registrarNodo("Servidor", coordX, coordY);
+			this.registrarServidor(new Servidor(coordX, coordY));
 			return new Retorno(Resultado.OK);
 		}
+	}
+	
+	public void registrarServidor(Vertice v) {
+		this.grafo.registrarVertice(v);
 	}
 
 	@Override
