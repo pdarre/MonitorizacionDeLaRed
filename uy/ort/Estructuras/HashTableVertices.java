@@ -1,15 +1,16 @@
-package Repo;
+package Estructuras;
 
 import uy.ort.ob201802.Modelo.Nodo;
+import uy.ort.ob201802.Modelo.Vertice;
 
 public class HashTableVertices {
 
-	private IVertice[] arrayVertices;
+	private Vertice[] arrayVertices;
 	private int size;
 
 	public HashTableVertices(int tam) {
 		size = this.buscarPrimo(tam * 2);
-		arrayVertices = new IVertice[size];
+		arrayVertices = new Vertice[size];
 		iniciarArrayNodos();
 	}
 
@@ -38,9 +39,10 @@ public class HashTableVertices {
 		return primo;
 	}
 	
+	
 	public int buscarIndiceVertice(String nodoId) {
 		for (int i = 0; i < size; i++) {
-			if (arrayVertices[i] != null && arrayVertices[i].getNodoId().equals(nodoId)) {
+			if (arrayVertices[i] != null && arrayVertices[i].getNodoId() == nodoId) {
 				return i;
 			}
 		}
@@ -58,7 +60,7 @@ public class HashTableVertices {
 	}
 
 	// busca el primer lugar libre en el arrayVertices a partir del indice generado
-	public int getLugarEnArrayVertice(IVertice vertice) {
+	public int getLugarEnArrayVertice(Vertice vertice) {
 		int lugar = getHashVertice(vertice.getCoordX(), vertice.getCoordY());
 		while (arrayVertices[lugar] != null) {
 			if (lugar == this.size - 1 && arrayVertices[size - 1] != null) {
@@ -74,7 +76,7 @@ public class HashTableVertices {
 
 	// retorna el Nodo si lo encentra en el arrayVertices, si no lo encuentra
 	// retorna null
-	public IVertice buscarVertice(double coordX, double coordY) {
+	public Vertice buscarVertice(double coordX, double coordY) {
 		for (int i = 0; i < arrayVertices.length; i++) {
 			if (arrayVertices[i] != null) {
 				if (arrayVertices[i].getCoordX() == coordX && arrayVertices[i].getCoordY() == coordY) {
@@ -89,7 +91,7 @@ public class HashTableVertices {
 		return size;
 	}
 
-	public void registrarVertice(IVertice vertice) {
+	public void registrarVertice(Vertice vertice) {
 		int lugar = getLugarEnArrayVertice(vertice);
 		arrayVertices[lugar] = vertice;
 	}
@@ -105,12 +107,12 @@ public class HashTableVertices {
 		return -1;
 	}
 	
-	public IVertice buscarVerticeXindice(int indice) {
+	public Vertice buscarVerticeXindice(int indice) {
 		return arrayVertices[indice];
 	}
 	
 	//pruebas
-	public IVertice[] getVertices() {
+	public Vertice[] getVertices() {
 		return this.arrayVertices;
 	}
 

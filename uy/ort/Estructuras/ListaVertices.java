@@ -1,4 +1,6 @@
-package Repo;
+package Estructuras;
+
+import uy.ort.ob201802.Modelo.Vertice;
 
 public class ListaVertices {
 
@@ -12,7 +14,7 @@ public class ListaVertices {
 		return raiz == null;
 	}
 
-	public void insertarVertice(IVertice vertice) {
+	public void insertarVertice(Vertice vertice) {
 		if (raiz == null) {
 			raiz = vertice;
 		} else {

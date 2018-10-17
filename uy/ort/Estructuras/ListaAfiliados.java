@@ -1,4 +1,4 @@
-package Repo;
+package Estructuras;
 
 import uy.ort.ob201802.Modelo.Afiliado;
 

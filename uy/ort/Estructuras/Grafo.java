@@ -1,6 +1,6 @@
-package Repo;
+package Estructuras;
 
-import uy.ort.ob201802.Modelo.Nodo;
+import uy.ort.ob201802.Modelo.Vertice;
 
 public class Grafo {
 
@@ -25,12 +25,12 @@ public class Grafo {
 		}
 	}
 
-	public void registrarVertice(IVertice vertice) {
+	public void registrarVertice(Vertice vertice) {
 		vertices.registrarVertice(vertice);
 		contador++;
 	}
 
-	public IVertice buscarVertice(Double coordX, Double coordY) {
+	public Vertice buscarVertice(Double coordX, Double coordY) {
 		return vertices.buscarVertice(coordX, coordY);
 	}
 
@@ -65,12 +65,12 @@ public class Grafo {
 	}
 
 	// recibe un vertice y retorna ua lista con los vertices adyacentes
-	public ListaVertices buscarAdyacentes(IVertice vertice) {
+	public ListaVertices buscarAdyacentes(Vertice vertice) {
 		ListaVertices retorno = new ListaVertices();
 		int indiceVerticeOrigen = vertices.buscarIndicePalabra(vertice.getCoordX(), vertice.getCoordY());
 		for (int i = 0; i < matrizAdy.length; i++) {
 			if (matrizAdy[indiceVerticeOrigen][i] != 0) {
-				IVertice temp = vertices.buscarVerticeXindice(i);
+				Vertice temp = vertices.buscarVerticeXindice(i);
 				retorno.insertarVertice(temp);
 			}
 		}
@@ -90,8 +90,17 @@ public class Grafo {
 		return vertices.getVertices();
 	}
 
-	public int buscarIndicePalabra(double coordX, double coordY) {
+	public int buscarIndiceVertice(double coordX, double coordY) {
 		int indice = vertices.buscarIndicePalabra(coordX, coordY);
 		return indice;
+	}
+
+	public boolean esAdyacente(IVertice origen, IVertice destino) {
+		int o = this.buscarIndiceVertice(origen.getCoordX(), origen.getCoordY());
+		int d = this.buscarIndiceVertice(destino.getCoordX(), origen.getCoordY());
+		if(this.matrizAdy[o][d] != 0) {
+			return true;
+		}
+		return false;
 	}
 }

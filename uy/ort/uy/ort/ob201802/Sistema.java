@@ -1,14 +1,15 @@
 package uy.ort.ob201802;
 
-import Repo.AbbAfiliados;
-import Repo.Grafo;
-import Repo.IVertice;
+import Estructuras.AbbAfiliados;
+import Estructuras.Grafo;
+import Estructuras.IVertice;
 import uy.ort.ob201802.Modelo.Afiliado;
 import uy.ort.ob201802.Modelo.Canalera;
 import uy.ort.ob201802.Modelo.Nodo;
+import uy.ort.ob201802.Modelo.Vertice;
 import uy.ort.ob201802.Retorno.Resultado;
-import uy.ort.ob201802.Util.Cedula;
-import uy.ort.ob201802.Util.Email;
+import uy.ort.ob201802.Utilidades.Cedula;
+import uy.ort.ob201802.Utilidades.Email;
 
 public class Sistema implements ISistema {
 
@@ -29,13 +30,15 @@ public class Sistema implements ISistema {
 	}
 
 	private void registrarServidorCentral(Double coordX, Double coordY) {
-		IVertice vertice = new Nodo("servidor", coordX, coordY);
+		Vertice vertice = new Nodo("servidor", coordX, coordY);
 		this.grafo.registrarVertice(vertice);
 	}
 
 	@Override
 	public Retorno destruirSistema() {
-		// arbol, grafo, etc en null
+		servidor = null;
+		arbolAfiliados = null;
+		grafo = null;
 		return new Retorno(Resultado.NO_IMPLEMENTADA);
 	}
 
@@ -78,7 +81,7 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno registrarCanalera(String chipid, String CIafiliado, Double coordX, Double coordY) {
-		IVertice vertice = new Canalera(chipid, CIafiliado, coordX, coordY);
+		Vertice vertice = new Canalera(chipid, CIafiliado, coordX, coordY);
 		if (this.grafo.arregloHashLleno()) {
 			return new Retorno(Resultado.ERROR_1);
 		} else if (this.grafo.buscarVertice(coordX, coordY) != null) {
@@ -92,7 +95,7 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno registrarNodo(String nodoid, Double coordX, Double coordY) {
-		IVertice vertice = new Nodo(nodoid, coordX, coordY);
+		Vertice vertice = new Nodo(nodoid, coordX, coordY);
 		if (this.grafo.arregloHashLleno()) {
 			return new Retorno(Resultado.ERROR_1);
 		} else if (this.grafo.buscarVertice(coordX, coordY) != null) {

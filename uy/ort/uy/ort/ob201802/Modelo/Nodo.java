@@ -1,13 +1,13 @@
 package uy.ort.ob201802.Modelo;
 
-import Repo.IVertice;
+import Estructuras.IVertice;
 
-public class Nodo implements IVertice{
+public class Nodo extends Vertice{
 
 	private String nodoId;
 	private double coordX;
 	private double coordY;
-	private IVertice siguiente;
+	private Vertice siguiente;
 
 	public Nodo(String nodoId, double coordX, double coordY) {
 		this.nodoId = nodoId;
@@ -17,44 +17,32 @@ public class Nodo implements IVertice{
 
 	public Nodo() {
 	}
-
-	@Override
-	public String getTipo() {
-		return "nodo";
-	}
-
-	@Override
-	public double getCoordX() {
-		return this.coordX;
-	}
-
-	@Override
-	public double getCoordY() {
-		return this.coordY;
-	}
 	
 	@Override
 	public String getNodoId() {
 		return this.nodoId;
 	}
 
-	@Override
 	public String getChipId() {
 		return null;
 	}
-
 	@Override
-	public String getCiAfiliado() {
-		return null;
+	public double getCoordY() {
+		return this.coordY;
 	}
-
+	
 	@Override
-	public IVertice getSiguiente() {
-		return this.siguiente;
+	public double getCoordX() {
+		return this.coordX;
 	}
-
+	
 	@Override
-	public void setSiguiente(IVertice v) {
+	public void setSiguiente(Vertice v) {
 		this.siguiente = v;
+	}
+	
+	@Override
+	public Vertice getSiguiente() {
+		return this.siguiente;
 	}
 }

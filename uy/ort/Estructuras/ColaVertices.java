@@ -1,4 +1,6 @@
-package Repo;
+package Estructuras;
+
+import uy.ort.ob201802.Modelo.Vertice;
 
 public class ColaVertices {
 
@@ -13,7 +15,7 @@ public class ColaVertices {
 		return raiz == null;
 	}
 
-	public void insertar(IVertice vertice) {
+	public void insertar(Vertice vertice) {
 		vertice.setSiguiente(null);
 		if (esVacia()) {
 			raiz = vertice;
