@@ -2,7 +2,6 @@ package uy.ort.ob201802;
 
 import uy.ort.ob201802.EDD.AbbAfiliados;
 import uy.ort.ob201802.EDD.Grafo;
-import uy.ort.ob201802.EDD.IVertice;
 import uy.ort.ob201802.Modelo.Afiliado;
 import uy.ort.ob201802.Modelo.Canalera;
 import uy.ort.ob201802.Modelo.Nodo;
@@ -14,7 +13,6 @@ import uy.ort.ob201802.Utilidades.Email;
 
 public class Sistema implements ISistema {
 
-	private Nodo servidor;
 	private AbbAfiliados arbolAfiliados;
 	private Grafo grafo;
 
@@ -36,7 +34,6 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno destruirSistema() {
-		servidor = null;
 		arbolAfiliados = null;
 		grafo = null;
 		return new Retorno(Resultado.NO_IMPLEMENTADA);

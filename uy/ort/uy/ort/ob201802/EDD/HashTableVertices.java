@@ -1,6 +1,5 @@
 package uy.ort.ob201802.EDD;
 
-import uy.ort.ob201802.Modelo.Nodo;
 import uy.ort.ob201802.Modelo.Vertice;
 
 public class HashTableVertices {
@@ -16,9 +15,7 @@ public class HashTableVertices {
 
 	// inicia cada lugar en el arrayVertices con null
 	public void iniciarArrayNodos() {
-		for (int i = 0; i < size; i++) {
-			arrayVertices[i] = null;
-		}
+		for (int i = 0; i < size; arrayVertices[i++] = null);
 	}
 
 	public int buscarPrimo(int num) {
@@ -37,16 +34,6 @@ public class HashTableVertices {
 			contador++;
 		}
 		return primo;
-	}
-	
-	
-	public int buscarIndiceVertice(String nodoId) {
-		for (int i = 0; i < size; i++) {
-			if (arrayVertices[i] != null && arrayVertices[i].getVerticeId() == nodoId) {
-				return i;
-			}
-		}
-		return 0;
 	}
 
 	// suma coordX + coordY
@@ -92,8 +79,7 @@ public class HashTableVertices {
 	}
 
 	public void registrarVertice(Vertice vertice) {
-		int lugar = getLugarEnArrayVertice(vertice);
-		arrayVertices[lugar] = vertice;
+		arrayVertices[getLugarEnArrayVertice(vertice)] = vertice;
 	}
 
 	public int buscarHashVertice(Double coordX, Double coordY) {
@@ -106,20 +92,22 @@ public class HashTableVertices {
 		}
 		return -1;
 	}
-	
+
 	public Vertice buscarVerticeXindice(int indice) {
 		return arrayVertices[indice];
 	}
-	
-	//pruebas
+
+	// pruebas
 	public Vertice[] getVertices() {
 		return this.arrayVertices;
 	}
 
-	public int buscarIndicePalabra(double coordX, double coordY) {
-		for(int i = 0; i < size;i++) {
-			if(arrayVertices[i] != null && arrayVertices[i].getCoordX() == coordX && arrayVertices[i].getCoordY() == coordY) {
-				if(arrayVertices[i+1]==null) return 0;
+	public int buscarIndiceVertice(double coordX, double coordY) {
+		for (int i = 0; i < size; i++) {
+			if (arrayVertices[i] != null && arrayVertices[i].getCoordX() == coordX
+					&& arrayVertices[i].getCoordY() == coordY) {
+				if (arrayVertices[i + 1] == null)
+					return 0;
 				return i;
 			}
 		}

@@ -46,11 +46,6 @@ public class Grafo {
 		this.matrizAdy[verticeDestino][verticeOrigen] = perdidaCalidad;
 	}
 
-	// solo para las pruebas
-	public HashTableVertices getHashTableVertices() {
-		return this.vertices;
-	}
-
 	public boolean existeTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf) {
 		int origen = this.vertices.buscarHashVertice(coordXi, coordYi);
 		int destino = this.vertices.buscarHashVertice(coordXf, coordYf);
@@ -65,17 +60,17 @@ public class Grafo {
 		this.matrizAdy[verticeDestino][verticeOrigen] = nuevoValorPerdidaCalidad;
 	}
 
-	// recibe un vertice y retorna ua lista con los vertices adyacentes
+	// recibe un vertice y retorna una lista con los vertices adyacentes
 	public ListaVertices buscarAdyacentes(Vertice vertice) {
-		ListaVertices retorno = new ListaVertices();
-		int indiceVerticeOrigen = vertices.buscarIndicePalabra(vertice.getCoordX(), vertice.getCoordY());
+		ListaVertices lista = new ListaVertices();
+		int indiceVerticeOrigen = vertices.buscarIndiceVertice(vertice.getCoordX(), vertice.getCoordY());
 		for (int i = 0; i < matrizAdy.length; i++) {
 			if (matrizAdy[indiceVerticeOrigen][i] != 0) {
 				Vertice temp = vertices.buscarVerticeXindice(i);
-				retorno.insertarVertice(temp);
+				lista.insertarVertice(temp);
 			}
 		}
-		return retorno;
+		return lista;
 	}
 
 	public int getSize() {
@@ -92,14 +87,14 @@ public class Grafo {
 	}
 
 	public int buscarIndiceVertice(double coordX, double coordY) {
-		int indice = vertices.buscarIndicePalabra(coordX, coordY);
+		int indice = vertices.buscarIndiceVertice(coordX, coordY);
 		return indice;
 	}
 
 	public boolean esAdyacente(IVertice origen, IVertice destino) {
 		int o = this.buscarIndiceVertice(origen.getCoordX(), origen.getCoordY());
 		int d = this.buscarIndiceVertice(destino.getCoordX(), origen.getCoordY());
-		if(this.matrizAdy[o][d] != 0) {
+		if (this.matrizAdy[o][d] != 0) {
 			return true;
 		}
 		return false;
@@ -107,16 +102,21 @@ public class Grafo {
 
 	public boolean tramoIsValid(Double coordXi, Double coordYi, Double coordXf, Double coordYf) {
 		Vertice origen = this.buscarVertice(coordXi, coordYi);
-		Vertice destino = this.buscarVertice(coordXf, coordYf);	
-		if(origen.getVerticeId() == "Servidor" && destino instanceof Canalera) {
-			return true;			
-		}else if(origen instanceof Canalera && destino.getVerticeId() == "Servidor") {
+		Vertice destino = this.buscarVertice(coordXf, coordYf);
+		if (origen.getVerticeId() == "Servidor" && destino instanceof Canalera) {
+			return true;
+		} else if (origen instanceof Canalera && destino.getVerticeId() == "Servidor") {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public String getVerticeId(double coordX, double coordY) {
 		return this.buscarVertice(coordX, coordY).getVerticeId();
+	}
+
+	// solo para las pruebas
+	public HashTableVertices getHashTableVertices() {
+		return this.vertices;
 	}
 }
