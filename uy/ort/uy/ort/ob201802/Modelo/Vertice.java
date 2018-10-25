@@ -42,4 +42,9 @@ public class Vertice implements IVertice {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public String toString() {
+		return null;
+	}
 }

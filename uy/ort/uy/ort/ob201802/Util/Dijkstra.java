@@ -1,20 +1,20 @@
 package uy.ort.ob201802.Util;
 
+import uy.ort.ob201802.EDD.ColaVertices;
 import uy.ort.ob201802.EDD.Grafo;
 import uy.ort.ob201802.EDD.HashTableVertices;
+import uy.ort.ob201802.EDD.ListaVertices;
 import uy.ort.ob201802.Modelo.Vertice;
 
 public class Dijkstra {
 	
 	private int matAdy[][];
 	private HashTableVertices vertices;
-	private Grafo grafo;
 	private int tope;
 	
 	public Dijkstra(Grafo g) {
 		this.matAdy = g.getMatriz();
 		this.vertices = g.getHashTableVertices();
-		this.grafo = g;
 		this.tope = vertices.getSize();
 	}
 
@@ -36,6 +36,11 @@ public class Dijkstra {
 		}
 		
 		dijkstraInterno(posO, dist, ant, vis);
+		
+		ListaVertices list = crearLista(ant, posO, posD);
+		
+		//temporal
+		printLista(list);
 			
 		return dist[posD];
 	}
@@ -87,4 +92,25 @@ public class Dijkstra {
 			}
 		}
 	}
+	
+	public ListaVertices crearLista(int[] ant, int posO, int posD) {
+		ListaVertices lista = new ListaVertices();
+		int temp = posD;
+		while(temp != posO) {
+			int posicion = temp;
+			lista.ingresarVerticeInvertido(vertices.buscarVerticeXindice(posicion));
+			temp = ant[posicion];			
+		}
+		lista.ingresarVerticeInvertido(vertices.buscarVerticeXindice(posO));
+		return lista;		
+	}
+	
+	public void printLista(ListaVertices lista) {
+		Vertice temp = (Vertice) lista.getRaiz();
+		while(temp!= null) {
+			System.out.print(temp.toString() + "|");
+			temp = temp.getSiguiente();
+		}
+	}
 }
+

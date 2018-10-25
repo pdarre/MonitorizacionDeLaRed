@@ -15,4 +15,6 @@ public interface IVertice {
 	public String getVerticeId();
 	
 	public boolean equals(Object obj);
+	
+	public String toString();
 }

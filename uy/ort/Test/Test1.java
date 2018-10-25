@@ -160,18 +160,19 @@ class Test1 {
 	
 	@Test
 	public void testDijktra() {
-		sis.inicializarSistema(5, -34.75, -55.55);
-		assertEquals(sis.registrarNodo("nodo1", -24.75, -48.55).resultado.name(), "OK");
-		assertEquals(sis.registrarNodo("nodo2", -30.75, -49.55).resultado.name(), "OK");
-		assertEquals(sis.registrarNodo("nodo3", -59.75, -50.55).resultado.name(), "OK");
-		assertEquals(sis.registrarNodo("nodo4", -61.75, -51.55).resultado.name(), "OK");
-		assertEquals(sis.registrarNodo("nodo5", -12.75, -52.55).resultado.name(), "OK");
-		
+		sis.inicializarSistema(50, -34.75, -55.55);
+		assertEquals(sis.registrarNodo("nodoId1", -24.75, -48.55).resultado.name(), "OK");
+		assertEquals(sis.registrarNodo("nodoId2", -30.75, -49.55).resultado.name(), "OK");
+		assertEquals(sis.registrarNodo("nodoId3", -59.75, -50.55).resultado.name(), "OK");
+		assertEquals(sis.registrarNodo("nodoId4", -61.75, -51.55).resultado.name(), "OK");
+		assertEquals(sis.registrarNodo("nodoId5", -12.75, -52.55).resultado.name(), "OK");
+		assertEquals(sis.registrarAfiliado("1.111.111-1", "Juan", "juan@juan.com").resultado.name(), "OK");
+				
 		//servidor-nodo1-20
 		assertEquals(sis.registrarTramo(-34.75, -55.55, -24.75, -48.55, 20).resultado.name(), "OK");
 		
 		//nodo1-nodo2-30
-		assertEquals(sis.registrarTramo(-24.75, -48.55, -30.75, -49.55, 30).resultado.name(), "OK");
+		assertEquals(sis.registrarTramo(-24.75, -48.55, -30.75, -49.55, 20).resultado.name(), "OK");
 		
 		//nodo2-nodo3-20
 		assertEquals(sis.registrarTramo(-30.75, -49.55, -59.75, -50.55, 20).resultado.name(), "OK");
@@ -186,15 +187,19 @@ class Test1 {
 		assertEquals(sis.registrarTramo(-59.75, -50.55, -12.75, -52.55, 10).resultado.name(), "OK");
 		
 		//nodo4-servidor-40
-		assertEquals(sis.registrarTramo(-61.75, -51.55, -34.75, -55.55, 40).resultado.name(), "OK");
+		assertEquals(sis.registrarTramo(-61.75, -51.55, -34.75, -55.55, 60).resultado.name(), "OK");
+		
+		assertEquals(sis.registrarCanalera("Canalera-1", "1.111.111-1", -14.75, -28.38).resultado.name(), "OK");
+		
+		//nodo5-canalera-40
+		assertEquals(sis.registrarTramo(-12.75, -52.55, -14.75, -28.38, 5).resultado.name(), "OK");
+		
+		
+		Vertice origen = sis.getGrafo().getHashTableVertices().buscarVerticeXindice(sis.getGrafo().buscarIndiceVertice(-34.75, -55.55));
+		Vertice destino = sis.getGrafo().getHashTableVertices().buscarVerticeXindice(sis.getGrafo().buscarIndiceVertice(-14.75, -28.38));
 		
 		Dijkstra dijkstra = new Dijkstra(sis.getGrafo());
-		
-		Vertice origen = sis.getGrafo().getHashTableVertices().buscarVerticeXindice(2);
-		Vertice destino = sis.getGrafo().getHashTableVertices().buscarVerticeXindice(10);
-		
 		System.out.println(dijkstra.dijkstra(origen, destino));
-		
 	}
 
 	//BORRAR!!!

@@ -69,4 +69,14 @@ public class ListaVertices {
 		}
 		return temp;
 	}
+
+	public void ingresarVerticeInvertido(Vertice v) {
+		if (raiz == null) {
+			raiz = v;
+		} else {
+			v.setSiguiente((Vertice) raiz);
+			raiz = v;
+		}
+
+	}
 }

@@ -49,4 +49,9 @@ public class Canalera extends Vertice {
 	public Vertice getSiguiente() {
 		return this.siguiente;
 	}
+	
+	@Override
+	public String toString() {
+		return chipId;
+	}
 }
