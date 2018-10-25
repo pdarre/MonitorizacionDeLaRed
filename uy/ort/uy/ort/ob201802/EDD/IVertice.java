@@ -13,4 +13,6 @@ public interface IVertice {
 	public Vertice getSiguiente();
 	
 	public String getVerticeId();
+	
+	public boolean equals(Object obj);
 }

@@ -8,7 +8,7 @@ import uy.ort.ob201802.Sistema;
 import uy.ort.ob201802.Modelo.Canalera;
 import uy.ort.ob201802.Modelo.Nodo;
 import uy.ort.ob201802.Modelo.Vertice;
-import uy.ort.ob201802.Utilidades.Dijkstra;
+import uy.ort.ob201802.Util.Dijkstra;
 
 class Test1 {
 
@@ -160,36 +160,40 @@ class Test1 {
 	
 	@Test
 	public void testDijktra() {
-		sis.inicializarSistema(5, -34.7599678, -55.7271004);
-		assertEquals(sis.registrarNodo("nodo1", -24.7593868, -51.3865004).resultado.name(), "OK");
-		assertEquals(sis.registrarNodo("nodo2", -30.7593868, -51.3865004).resultado.name(), "OK");
-		assertEquals(sis.registrarNodo("nodo3", -59.7593868, -51.3865004).resultado.name(), "OK");
-		assertEquals(sis.registrarNodo("nodo4", -61.7593868, -51.3865004).resultado.name(), "OK");
-		assertEquals(sis.registrarNodo("nodo5", -12.7593868, -51.3865004).resultado.name(), "OK");
+		sis.inicializarSistema(5, -34.75, -55.55);
+		assertEquals(sis.registrarNodo("nodo1", -24.75, -48.55).resultado.name(), "OK");
+		assertEquals(sis.registrarNodo("nodo2", -30.75, -49.55).resultado.name(), "OK");
+		assertEquals(sis.registrarNodo("nodo3", -59.75, -50.55).resultado.name(), "OK");
+		assertEquals(sis.registrarNodo("nodo4", -61.75, -51.55).resultado.name(), "OK");
+		assertEquals(sis.registrarNodo("nodo5", -12.75, -52.55).resultado.name(), "OK");
 		
 		//servidor-nodo1-20
-		sis.registrarTramo(-34.7599678, -55.7271004, -24.7593868, -51.3865004, 20);
+		assertEquals(sis.registrarTramo(-34.75, -55.55, -24.75, -48.55, 20).resultado.name(), "OK");
 		
 		//nodo1-nodo2-30
-		sis.registrarTramo(-24.7593868, -51.3865004, -30.7593868, -51.3865004, 30);
+		assertEquals(sis.registrarTramo(-24.75, -48.55, -30.75, -49.55, 30).resultado.name(), "OK");
 		
 		//nodo2-nodo3-20
-		sis.registrarTramo(-30.7593868, -51.3865004, -59.7593868, -51.3865004, 20);
+		assertEquals(sis.registrarTramo(-30.75, -49.55, -59.75, -50.55, 20).resultado.name(), "OK");
 		
 		//nodo2-nodo4-10
-		sis.registrarTramo(-30.7593868, -51.3865004, -61.7593868, -51.3865004, 10);
+		assertEquals(sis.registrarTramo(-30.75, -49.55, -61.75, -51.55, 10).resultado.name(), "OK");
 		
 		//nodo4-nodo5-40
-		sis.registrarTramo(-61.7593868, -51.3865004, -12.7593868, -51.3865004, 40);
+		assertEquals(sis.registrarTramo(-61.75, -51.55, -12.75, -52.55, 40).resultado.name(), "OK");
 		
 		//nodo3-nodo5-10
-		sis.registrarTramo(-59.7593868, -51.3865004, -12.7593868, -51.3865004, 10);
+		assertEquals(sis.registrarTramo(-59.75, -50.55, -12.75, -52.55, 10).resultado.name(), "OK");
 		
 		//nodo4-servidor-40
-		sis.registrarTramo(-61.7593868, -51.3865004, -34.7599678, -55.7271004, 40);
+		assertEquals(sis.registrarTramo(-61.75, -51.55, -34.75, -55.55, 40).resultado.name(), "OK");
 		
 		Dijkstra dijkstra = new Dijkstra(sis.getGrafo());
-		dijkstra.dijkstra_GetMinDistances(2);
+		
+		Vertice origen = sis.getGrafo().getHashTableVertices().buscarVerticeXindice(2);
+		Vertice destino = sis.getGrafo().getHashTableVertices().buscarVerticeXindice(10);
+		
+		System.out.println(dijkstra.dijkstra(origen, destino));
 		
 	}
 

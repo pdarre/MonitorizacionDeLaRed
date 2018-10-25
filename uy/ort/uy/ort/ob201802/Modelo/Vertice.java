@@ -29,6 +29,13 @@ public class Vertice implements IVertice {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		Vertice temp = (Vertice) obj;
+		if(this.getCoordX() == temp.getCoordX() && this.getCoordY() == temp.getCoordY()) return true;
+		return false;
+	}
 
 	@Override
 	public String getVerticeId() {

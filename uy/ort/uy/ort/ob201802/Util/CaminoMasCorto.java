@@ -1,4 +1,4 @@
-package uy.ort.ob201802.Utilidades;
+package uy.ort.ob201802.Util;
 
 import java.util.ArrayList;
 

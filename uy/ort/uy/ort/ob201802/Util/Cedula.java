@@ -1,4 +1,4 @@
-package uy.ort.ob201802.Utilidades;
+package uy.ort.ob201802.Util;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -21,7 +21,7 @@ public class Grafo {
 	public void iniciarMatriz() {
 		for (int i = 0; i < matrizAdy.length; i++) {
 			for (int j = 0; j < matrizAdy.length; j++) {
-				matrizAdy[i][j] = 0;
+				matrizAdy[i][j] = -1;
 			}
 		}
 	}
@@ -40,16 +40,24 @@ public class Grafo {
 	}
 
 	public void registrarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int perdidaCalidad) {
-		int verticeOrigen = vertices.buscarHashVertice(coordXi, coordYi);
-		int verticeDestino = vertices.buscarHashVertice(coordXf, coordYf);
-		this.matrizAdy[verticeOrigen][verticeDestino] = perdidaCalidad;
-		this.matrizAdy[verticeDestino][verticeOrigen] = perdidaCalidad;
+		int origen = this.vertices.buscarIndiceVertice(coordXi, coordYi);
+		int destino = this.vertices.buscarIndiceVertice(coordXf, coordYf);
+		this.matrizAdy[origen][destino] = perdidaCalidad;
+		this.matrizAdy[destino][origen] = perdidaCalidad;
 	}
 
 	public boolean existeTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf) {
-		int origen = this.vertices.buscarHashVertice(coordXi, coordYi);
-		int destino = this.vertices.buscarHashVertice(coordXf, coordYf);
-		return this.matrizAdy[origen][destino] != 0;
+		int origen = this.vertices.buscarIndiceVertice(coordXi, coordYi);
+		int destino = this.vertices.buscarIndiceVertice(coordXf, coordYf);
+		if(matrizAdy[origen][destino] != -1) {
+			return true;
+		}
+		return false;
+		
+		
+//		int origen = this.vertices.buscarHashVertice(coordXi, coordYi);
+//		int destino = this.vertices.buscarHashVertice(coordXf, coordYf);		
+//		return this.matrizAdy[origen][destino] != -1;
 	}
 
 	public void modificarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf,
@@ -61,17 +69,17 @@ public class Grafo {
 	}
 
 	// recibe un vertice y retorna una lista con los vertices adyacentes
-	public ListaVertices buscarAdyacentes(Vertice vertice) {
-		ListaVertices lista = new ListaVertices();
-		int indiceVerticeOrigen = vertices.buscarIndiceVertice(vertice.getCoordX(), vertice.getCoordY());
-		for (int i = 0; i < matrizAdy.length; i++) {
-			if (matrizAdy[indiceVerticeOrigen][i] != 0) {
-				Vertice temp = vertices.buscarVerticeXindice(i);
-				lista.insertarVertice(temp);
-			}
-		}
-		return lista;
-	}
+//	public ListaVertices buscarAdyacentes(Vertice vertice) {
+//		ListaVertices lista = new ListaVertices();
+//		int indiceVerticeOrigen = vertices.buscarIndiceVertice(vertice.getCoordX(), vertice.getCoordY());
+//		for (int i = 0; i < matrizAdy.length; i++) {
+//			if (matrizAdy[indiceVerticeOrigen][i] != 0) {
+//				Vertice temp = vertices.buscarVerticeXindice(i);
+//				lista.insertarVertice(temp);
+//			}
+//		}
+//		return lista;
+//	}
 
 	public int getSize() {
 		return vertices.getSize();
@@ -91,14 +99,14 @@ public class Grafo {
 		return indice;
 	}
 
-	public boolean esAdyacente(IVertice origen, IVertice destino) {
-		int o = this.buscarIndiceVertice(origen.getCoordX(), origen.getCoordY());
-		int d = this.buscarIndiceVertice(destino.getCoordX(), origen.getCoordY());
-		if (this.matrizAdy[o][d] != 0) {
-			return true;
-		}
-		return false;
-	}
+//	public boolean esAdyacente(IVertice origen, IVertice destino) {
+//		int o = this.buscarIndiceVertice(origen.getCoordX(), origen.getCoordY());
+//		int d = this.buscarIndiceVertice(destino.getCoordX(), origen.getCoordY());
+//		if (this.matrizAdy[o][d] != 0) {
+//			return true;
+//		}
+//		return false;
+//	}
 
 	public boolean tramoIsValid(Double coordXi, Double coordYi, Double coordXf, Double coordYf) {
 		Vertice origen = this.buscarVertice(coordXi, coordYi);

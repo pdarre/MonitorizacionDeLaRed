@@ -15,7 +15,8 @@ public class HashTableVertices {
 
 	// inicia cada lugar en el arrayVertices con null
 	public void iniciarArrayNodos() {
-		for (int i = 0; i < size; arrayVertices[i++] = null);
+		for (int i = 0; i < size; arrayVertices[i++] = null)
+			;
 	}
 
 	public int buscarPrimo(int num) {
@@ -104,13 +105,19 @@ public class HashTableVertices {
 
 	public int buscarIndiceVertice(double coordX, double coordY) {
 		for (int i = 0; i < size; i++) {
-			if (arrayVertices[i] != null && arrayVertices[i].getCoordX() == coordX
-					&& arrayVertices[i].getCoordY() == coordY) {
-				if (arrayVertices[i + 1] == null)
-					return 0;
+			if (arrayVertices[i] != null && arrayVertices[i].getCoordX() == coordX && arrayVertices[i].getCoordY() == coordY) {
 				return i;
 			}
 		}
-		return 0;
+		return -1;
+	}
+
+	public int buscarIndiceVertice(Vertice v) {
+		for (int i = 0; i < arrayVertices.length; i++) {
+			if (arrayVertices[i] != null && arrayVertices[i].equals(v)) {
+				return i;
+			}
+		}
+		return -1;
 	}
 }

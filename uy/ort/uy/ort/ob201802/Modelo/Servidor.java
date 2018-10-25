@@ -2,7 +2,6 @@ package uy.ort.ob201802.Modelo;
 
 public class Servidor extends Vertice {
 
-	private String nodoId;
 	private double coordX;
 	private double coordY;
 	private Vertice siguiente;
@@ -11,7 +10,6 @@ public class Servidor extends Vertice {
 		this.coordX = coordX;
 		this.coordY = coordY;
 		this.siguiente = null;
-		this.nodoId = "Servidor";
 	}
 	
 	@Override
