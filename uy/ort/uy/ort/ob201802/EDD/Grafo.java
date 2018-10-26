@@ -49,7 +49,7 @@ public class Grafo {
 	public boolean existeTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf) {
 		int origen = this.vertices.buscarIndiceVertice(coordXi, coordYi);
 		int destino = this.vertices.buscarIndiceVertice(coordXf, coordYf);
-		if(matrizAdy[origen][destino] != -1) {
+		if (matrizAdy[origen][destino] != -1) {
 			return true;
 		}
 		return false;
@@ -62,7 +62,6 @@ public class Grafo {
 		this.matrizAdy[verticeOrigen][verticeDestino] = nuevoValorPerdidaCalidad;
 		this.matrizAdy[verticeDestino][verticeOrigen] = nuevoValorPerdidaCalidad;
 	}
-
 
 	public int getSize() {
 		return vertices.getSize();
@@ -85,18 +84,17 @@ public class Grafo {
 	public boolean tramoIsValid(Double coordXi, Double coordYi, Double coordXf, Double coordYf) {
 		Vertice origen = this.buscarVertice(coordXi, coordYi);
 		Vertice destino = this.buscarVertice(coordXf, coordYf);
-		if (origen.getVerticeId() == "Servidor" && destino instanceof Canalera) {
+		if (origen.getVerticeId() == "Servidor" && destino instanceof Canalera)
 			return true;
-		} else if (origen instanceof Canalera && destino.getVerticeId() == "Servidor") {
+		if (origen instanceof Canalera && destino.getVerticeId() == "Servidor")
 			return true;
-		}
 		return false;
 	}
 
 	public String getVerticeId(double coordX, double coordY) {
 		return this.buscarVertice(coordX, coordY).getVerticeId();
 	}
-	
+
 	public Vertice getServidor() {
 		return vertices.getServidor();
 	}

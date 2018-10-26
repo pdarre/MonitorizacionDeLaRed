@@ -25,9 +25,9 @@ public class AbbAfiliados {
 		if (afiliado == null) {
 			return null;
 		} else {
-			if (ci == Cedula.convertirCI(afiliado.getCedula())) {
+			if (ci == Cedula.convertirCI(afiliado.getCedula()))
 				return afiliado;
-			} else if (ci < Cedula.convertirCI(afiliado.getCedula())) {
+			if (ci < Cedula.convertirCI(afiliado.getCedula())) {
 				return getAfiliadoByCi(cedula, afiliado.getIzq());
 			} else {
 				return getAfiliadoByCi(cedula, afiliado.getDer());
@@ -90,7 +90,6 @@ public class AbbAfiliados {
 		return getNivelAfiliado(cedula, this.raiz);
 	}
 
-	
 	public int getNivelAfiliado(String cedula, Afiliado afiliado) {
 		int cont = 1;
 		if (afiliado == null) {

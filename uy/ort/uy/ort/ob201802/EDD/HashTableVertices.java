@@ -67,9 +67,8 @@ public class HashTableVertices {
 	public Vertice buscarVertice(double coordX, double coordY) {
 		for (int i = 0; i < arrayVertices.length; i++) {
 			if (arrayVertices[i] != null) {
-				if (arrayVertices[i].getCoordX() == coordX && arrayVertices[i].getCoordY() == coordY) {
+				if (arrayVertices[i].getCoordX() == coordX && arrayVertices[i].getCoordY() == coordY)
 					return arrayVertices[i];
-				}
 			}
 		}
 		return null;
@@ -85,11 +84,10 @@ public class HashTableVertices {
 
 	public int buscarHashVertice(Double coordX, Double coordY) {
 		for (int i = 0; i < arrayVertices.length; i++) {
-			if (arrayVertices[i] != null) {
-				if (arrayVertices[i].getCoordX() == coordX && arrayVertices[i].getCoordY() == coordY) {
+			if (arrayVertices[i] != null)
+				if (arrayVertices[i].getCoordX() == coordX && arrayVertices[i].getCoordY() == coordY)
 					return i;
-				}
-			}
+
 		}
 		return -1;
 	}
@@ -115,9 +113,8 @@ public class HashTableVertices {
 
 	public int buscarIndiceVertice(Vertice v) {
 		for (int i = 0; i < arrayVertices.length; i++) {
-			if (arrayVertices[i] != null && arrayVertices[i].equals(v)) {
+			if (arrayVertices[i] != null && arrayVertices[i].equals(v))
 				return i;
-			}
 		}
 		return -1;
 	}

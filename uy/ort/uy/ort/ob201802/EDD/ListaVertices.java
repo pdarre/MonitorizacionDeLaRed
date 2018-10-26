@@ -77,6 +77,5 @@ public class ListaVertices {
 			v.setSiguiente((Vertice) raiz);
 			raiz = v;
 		}
-
 	}
 }
