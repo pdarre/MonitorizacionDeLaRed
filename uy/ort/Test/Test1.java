@@ -164,26 +164,26 @@ class Test1 {
 	@Test
 	public void calidadCanalera() {
 		crearGrafoCompleto();
-		// registra canalera sin camino a servidor
-		assertEquals(sis.registrarCanalera("CanaleraId7", "6.666.666-6", -20.75, -27.35).resultado.name(), "OK");
 
 		Retorno retERROR1 = sis.calidadCanalera(-18.76, -28.35);
 		assertEquals(retERROR1.valorEntero, 0);
 		assertEquals(retERROR1.resultado.name(), "ERROR_1");
 
+		// registra canalera sin camino a servidor
+		assertEquals(sis.registrarCanalera("CanaleraId15", "6.666.666-6", -20.75, -27.35).resultado.name(), "OK");
 		Retorno retERROR2 = sis.calidadCanalera(-20.75, -27.35);
 		assertEquals(retERROR2.resultado.name(), "ERROR_2");
 
-		// prueba perdida de calidad a canaleraId5
-		Retorno retOK = sis.calidadCanalera(-18.75, -28.35);
-		assertEquals(retOK.valorEntero, 85);
+		// prueba perdida de calidad a canaleraId14
+		Retorno retOK = sis.calidadCanalera(-34.885236, -56.108902);
+		assertEquals(retOK.valorEntero, 114);
 		assertEquals(retOK.resultado.name(), "OK");
 	}
 
 	private void crearGrafoCompleto() {
 		sis.destruirSistema();
 		// Servidor
-		sis.inicializarSistema(10, -34.75, -55.55);
+		sis.inicializarSistema(20, -34.904081, -56.190410);
 		// Afiliados
 		assertEquals(sis.registrarAfiliado("4.444.444-4", "Lucia", "lucia@lucia.com").resultado.name(), "OK");
 		assertEquals(sis.registrarAfiliado("3.333.333-3", "Maria", "maria@maria.com").resultado.name(), "OK");
@@ -192,76 +192,105 @@ class Test1 {
 		assertEquals(sis.registrarAfiliado("6.666.666-6", "Francisco", "francisco@francisco.com").resultado.name(),
 				"OK");
 		assertEquals(sis.registrarAfiliado("5.555.555-5", "Andres", "andres@andres.com").resultado.name(), "OK");
+		assertEquals(sis.registrarAfiliado("7.777.777-7", "Lucia2", "lucia2@lucia2.com").resultado.name(), "OK");
+		assertEquals(sis.registrarAfiliado("8.888.888-8", "Maria2", "maria2@maria2.com").resultado.name(), "OK");
+		assertEquals(sis.registrarAfiliado("9.999.999-9", "Juan2", "juan2@juan2.com").resultado.name(), "OK");
+		assertEquals(sis.registrarAfiliado("1.111.112-7", "Luis2", "luis2@luis2.com").resultado.name(), "OK");
+		assertEquals(sis.registrarAfiliado("1.111.113-3", "Lucia3", "lucia3@lucia3.com").resultado.name(), "OK");
+		assertEquals(sis.registrarAfiliado("1.111.114-9", "Maria3", "maria3@maria3.com").resultado.name(), "OK");
+		assertEquals(sis.registrarAfiliado("1.111.115-5", "Juan3", "juan3@juan3.com").resultado.name(), "OK");
+		assertEquals(sis.registrarAfiliado("1.111.116-1", "Luis3", "luis3@luis3.com").resultado.name(), "OK");
 
 		// Nodos
-		assertEquals(sis.registrarNodo("nodoId1", -24.75, -48.55).resultado.name(), "OK");
-		assertEquals(sis.registrarNodo("nodoId2", -30.75, -49.55).resultado.name(), "OK");
-		assertEquals(sis.registrarNodo("nodoId3", -59.75, -50.55).resultado.name(), "OK");
-		assertEquals(sis.registrarNodo("nodoId4", -61.75, -51.55).resultado.name(), "OK");
-		assertEquals(sis.registrarNodo("nodoId5", -12.75, -52.55).resultado.name(), "OK");
-		assertEquals(sis.registrarNodo("nodoId6", -40.75, -45.55).resultado.name(), "OK");
-		assertEquals(sis.registrarNodo("nodoId7", -37.75, -40.55).resultado.name(), "OK");
+		assertEquals(sis.registrarNodo("nodoId1", -34.895378, -56.189077).resultado.name(), "OK");
+		assertEquals(sis.registrarNodo("nodoId2", -34.884016, -56.174349).resultado.name(), "OK");
+		assertEquals(sis.registrarNodo("nodoId3", -34.870581, -56.138626).resultado.name(), "OK");
+		assertEquals(sis.registrarNodo("nodoId4", -34.911098, -56.165418).resultado.name(), "OK");
+		assertEquals(sis.registrarNodo("nodoId5", -34.901274, -56.139839).resultado.name(), "OK");
+		assertEquals(sis.registrarNodo("nodoId6", -34.885342, -56.121980).resultado.name(), "OK");
+		assertEquals(sis.registrarNodo("nodoId7", -34.884928, -56.110715).resultado.name(), "OK");
 
 		// Canaleras
-		assertEquals(sis.registrarCanalera("CanaleraId1", "1.111.111-1", -14.75, -28.35).resultado.name(), "OK");
-		assertEquals(sis.registrarCanalera("CanaleraId2", "2.222.222-2", -15.75, -28.35).resultado.name(), "OK");
-		assertEquals(sis.registrarCanalera("CanaleraId3", "3.333.333-3", -16.75, -28.35).resultado.name(), "OK");
-		assertEquals(sis.registrarCanalera("CanaleraId4", "4.444.444-4", -17.75, -28.35).resultado.name(), "OK");
-		assertEquals(sis.registrarCanalera("CanaleraId5", "5.555.555-5", -18.75, -28.35).resultado.name(), "OK");
-		assertEquals(sis.registrarCanalera("CanaleraId6", "6.666.666-6", -19.75, -28.35).resultado.name(), "OK");
+		assertEquals(sis.registrarCanalera("CanaleraId1", "1.111.111-1", -34.893944, -56.189678).resultado.name(),
+				"OK");
+		assertEquals(sis.registrarCanalera("CanaleraId2", "2.222.222-2", -34.895422, -56.187993).resultado.name(),
+				"OK");
+		assertEquals(sis.registrarCanalera("CanaleraId3", "3.333.333-3", -34.882872, -56.174210).resultado.name(),
+				"OK");
+		assertEquals(sis.registrarCanalera("CanaleraId4", "4.444.444-4", -34.883981, -56.172729).resultado.name(),
+				"OK");
+		assertEquals(sis.registrarCanalera("CanaleraId5", "5.555.555-5", -34.870123, -56.139838).resultado.name(),
+				"OK");
+		assertEquals(sis.registrarCanalera("CanaleraId6", "6.666.666-6", -34.871400, -56.138315).resultado.name(),
+				"OK");
+		assertEquals(sis.registrarCanalera("CanaleraId7", "7.777.777-7", -34.910060, -56.166394).resultado.name(),
+				"OK");
+		assertEquals(sis.registrarCanalera("CanaleraId8", "8.888.888-8", -34.911116, -56.164206).resultado.name(),
+				"OK");
+		assertEquals(sis.registrarCanalera("CanaleraId9", "9.999.999-9", -34.900156, -56.140515).resultado.name(),
+				"OK");
+		assertEquals(sis.registrarCanalera("CanaleraId10", "1.111.112-7", -34.902831, -56.139463).resultado.name(),
+				"OK");
+		assertEquals(sis.registrarCanalera("CanaleraId11", "1.111.113-3", -34.885993, -56.122355).resultado.name(),
+				"OK");
+		assertEquals(sis.registrarCanalera("CanaleraId12", "1.111.114-9", -34.885571, -56.120467).resultado.name(),
+				"OK");
+		assertEquals(sis.registrarCanalera("CanaleraId13", "1.111.115-5", -34.885826, -56.111380).resultado.name(),
+				"OK");
+		assertEquals(sis.registrarCanalera("CanaleraId14", "1.111.116-1", -34.885236, -56.108902).resultado.name(),
+				"OK");
 
 		// tramos entre nodos
-		// servidor-nodo1-20
-		assertEquals(sis.registrarTramo(-34.75, -55.55, -24.75, -48.55, 20).resultado.name(), "OK");
-		// nodo1-nodo2-30
-		assertEquals(sis.registrarTramo(-24.75, -48.55, -30.75, -49.55, 20).resultado.name(), "OK");
-		// nodo2-nodo3-20
-		assertEquals(sis.registrarTramo(-30.75, -49.55, -59.75, -50.55, 20).resultado.name(), "OK");
-		// nodo2-nodo4-10
-		assertEquals(sis.registrarTramo(-30.75, -49.55, -61.75, -51.55, 10).resultado.name(), "OK");
-		// nodo4-nodo5-40
-		assertEquals(sis.registrarTramo(-61.75, -51.55, -12.75, -52.55, 40).resultado.name(), "OK");
-		// nodo3-nodo5-10
-		assertEquals(sis.registrarTramo(-59.75, -50.55, -12.75, -52.55, 10).resultado.name(), "OK");
-		// nodo4-servidor-40
-		assertEquals(sis.registrarTramo(-61.75, -51.55, -34.75, -55.55, 60).resultado.name(), "OK");
-		// servidor-nodo6-10
-		assertEquals(sis.registrarTramo(-34.75, -55.55, -40.75, -45.55, 10).resultado.name(), "OK");
-		// nodo6-nodo7-20
-		assertEquals(sis.registrarTramo(-40.75, -45.55, -37.75, -40.55, 20).resultado.name(), "OK");
+		// servidor-nodo1-80
+		assertEquals(sis.registrarTramo(-34.904081, -56.190410, -34.895378, -56.189077, 80).resultado.name(), "OK");
+		// nodo1-nodo2-10
+		assertEquals(sis.registrarTramo(-34.895378, -56.189077, -34.884016, -56.174349, 10).resultado.name(), "OK");
+		// nodo2-nodo3-30
+		assertEquals(sis.registrarTramo(-34.884016, -56.174349, -34.870581, -56.138626, 30).resultado.name(), "OK");
+		// servidor-nodo4-20
+		assertEquals(sis.registrarTramo(-34.904081, -56.190410, -34.911098, -56.165418, 20).resultado.name(), "OK");
+		// nodo4-nodo5-30
+		assertEquals(sis.registrarTramo(-34.911098, -56.165418, -34.901274, -56.139839, 30).resultado.name(), "OK");
+		// nodo1-nodo4-10
+		assertEquals(sis.registrarTramo(-34.895378, -56.189077, -34.911098, -56.165418, 10).resultado.name(), "OK");
+		// nodo2-nodo5-20
+		assertEquals(sis.registrarTramo(-34.884016, -56.174349, -34.901274, -56.139839, 20).resultado.name(), "OK");
+		// nodo3-nodo6-10
+		assertEquals(sis.registrarTramo(-34.870581, -56.138626, -34.885342, -56.121980, 10).resultado.name(), "OK");
+		// nodo6-nodo7-25
+		assertEquals(sis.registrarTramo(-34.885342, -56.121980, -34.884928, -56.110715, 25).resultado.name(), "OK");
 
 		// tramos entre nodo-canalera
 		// nodoId1 - canaleraId1
-		assertEquals(sis.registrarTramo(-24.75, -48.55, -14.75, -28.35, 11).resultado.name(), "OK");
-		// nodoId2 - canaleraId2
-		assertEquals(sis.registrarTramo(-30.75, -49.55, -15.75, -28.35, 12).resultado.name(), "OK");
-		// nodoId3 - canaleraId3
-		assertEquals(sis.registrarTramo(-59.75, -50.55, -16.75, -28.35, 13).resultado.name(), "OK");
-		// nodoId4 - canaleraId4
-		assertEquals(sis.registrarTramo(-61.75, -51.55, -17.75, -28.35, 14).resultado.name(), "OK");
-		// nodoId5 - canaleraId5
-		assertEquals(sis.registrarTramo(-12.75, -52.55, -18.75, -28.35, 15).resultado.name(), "OK");
-		// nodoId6 - canaleraId6
-		assertEquals(sis.registrarTramo(-40.75, -45.55, -19.75, -28.35, 16).resultado.name(), "OK");
+		assertEquals(sis.registrarTramo(-34.895378, -56.189077, -34.893944, -56.189678, 15).resultado.name(), "OK");
+		// nodoId1 - canaleraId2
+		assertEquals(sis.registrarTramo(-34.895378, -56.189077, -34.895422, -56.187993, 25).resultado.name(), "OK");
+		// nodoId2 - canaleraId3
+		assertEquals(sis.registrarTramo(-34.884016, -56.174349, -34.882872, -56.174210, 15).resultado.name(), "OK");
+		// nodoId2 - canaleraId4
+		assertEquals(sis.registrarTramo(-34.884016, -56.174349, -34.883981, -56.172729, 20).resultado.name(), "OK");
+		// nodoId3 - canaleraId5
+		assertEquals(sis.registrarTramo(-34.870581, -56.138626, -34.870123, -56.139838, 10).resultado.name(), "OK");
+		// nodoId3 - canaleraId6
+		assertEquals(sis.registrarTramo(-34.870581, -56.138626, -34.871400, -56.138315, 18).resultado.name(), "OK");
+		// nodoId4 - canaleraId7
+		assertEquals(sis.registrarTramo(-34.911098, -56.165418, -34.910060, -56.166394, 12).resultado.name(), "OK");
+		// nodoId4 - canaleraId8
+		assertEquals(sis.registrarTramo(-34.911098, -56.165418, -34.911116, -56.164206, 32).resultado.name(), "OK");
+		// nodoId5 - canaleraId9
+		assertEquals(sis.registrarTramo(-34.901274, -56.139839, -34.900156, -56.140515, 18).resultado.name(), "OK");
+		// nodoId5 - canaleraId10
+		assertEquals(sis.registrarTramo(-34.901274, -56.139839, -34.902831, -56.139463, 20).resultado.name(), "OK");
+		// nodoId6 - canaleraId11
+		assertEquals(sis.registrarTramo(-34.885342, -56.121980, -34.885993, -56.122355, 15).resultado.name(), "OK");
+		// nodoId6 - canaleraId12
+		assertEquals(sis.registrarTramo(-34.885342, -56.121980, -34.885571, -56.120467, 23).resultado.name(), "OK");
+		// nodoId7 - canaleraId13
+		assertEquals(sis.registrarTramo(-34.884928, -56.110715, -34.885826, -56.111380, 17).resultado.name(), "OK");
+		// nodoId7 - canaleraId14
+		assertEquals(sis.registrarTramo(-34.884928, -56.110715, -34.885236, -56.108902, 9).resultado.name(), "OK");
 	}
 
-//	// BORRAR!!!
-//	public void printMatriz(int[][] matriz) {
-//		int largo = sis.getGrafo().getMatriz().length;
-//		for (int i = 0; i < largo; i++) {
-//			for (int j = 0; j < largo; j++) {
-//				int valor = sis.getGrafo().getMatriz()[i][j];
-//				if (valor != 0) {
-//					System.out.print("{" + i + "}");
-//					System.out.print("{" + j + "}");
-//					System.out.println(valor);
-//				}
-//			}
-//			System.out.print("");
-//		}
-//		System.out.println();
-//	}
-//
 //	// BORRAR!!!
 	public void printArray(Vertice[] v) {
 		for (int i = 0; i < v.length; i++) {
