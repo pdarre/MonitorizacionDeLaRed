@@ -105,7 +105,8 @@ public class HashTableVertices {
 
 	public int buscarIndiceVertice(double coordX, double coordY) {
 		for (int i = 0; i < size; i++) {
-			if (arrayVertices[i] != null && arrayVertices[i].getCoordX() == coordX && arrayVertices[i].getCoordY() == coordY) {
+			if (arrayVertices[i] != null && arrayVertices[i].getCoordX() == coordX
+					&& arrayVertices[i].getCoordY() == coordY) {
 				return i;
 			}
 		}
@@ -119,5 +120,20 @@ public class HashTableVertices {
 			}
 		}
 		return -1;
+	}
+
+	public boolean isExiste(int i) {
+		return arrayVertices[i] != null;
+	}
+
+	public Vertice getServidor() {
+		for (int i = 0; i < arrayVertices.length; i++) {
+			if (arrayVertices[i] != null) {
+				if (arrayVertices[i].toString().equals("Servidor")) {
+					return arrayVertices[i];
+				}
+			}
+		}
+		return null;
 	}
 }

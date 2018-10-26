@@ -1,6 +1,5 @@
 package uy.ort.ob201802.Util;
 
-import uy.ort.ob201802.EDD.ColaVertices;
 import uy.ort.ob201802.EDD.Grafo;
 import uy.ort.ob201802.EDD.HashTableVertices;
 import uy.ort.ob201802.EDD.ListaVertices;
@@ -11,20 +10,28 @@ public class Dijkstra {
 	private int matAdy[][];
 	private HashTableVertices vertices;
 	private int tope;
+	Grafo grafo;
+	int[] dist;
 	
 	public Dijkstra(Grafo g) {
 		this.matAdy = g.getMatriz();
 		this.vertices = g.getHashTableVertices();
 		this.tope = vertices.getSize();
+		grafo = g;
 	}
 
 	public int dijkstra(Vertice origen, Vertice destino)
 	{
+		//si destino es null, no existe el vertice destino, retorna -1 (REVISAR!!!)
+		if(destino == null)return -1;
+		
 		int posO = vertices.buscarIndiceVertice(origen);
 		int posD = vertices.buscarIndiceVertice(destino);
 		
 		// Etapa 1: Inicializo vectores
-		int[] dist = new int[tope];
+//		int[] dist = new int[tope];
+		dist = new int[tope];
+		
 		int[] ant = new int[tope];
 		boolean[] vis = new boolean[tope];
 		
@@ -37,11 +44,11 @@ public class Dijkstra {
 		
 		dijkstraInterno(posO, dist, ant, vis);
 		
-		ListaVertices list = crearLista(ant, posO, posD);
-		
-		//temporal
-		printLista(list);
-			
+//		ListaVertices list = crearLista(ant, posO, posD);
+//		
+//		//temporal
+//		printLista(list);
+				
 		return dist[posD];
 	}
 
@@ -111,6 +118,7 @@ public class Dijkstra {
 			System.out.print(temp.toString() + "|");
 			temp = temp.getSiguiente();
 		}
+		System.out.println();
 	}
 }
 

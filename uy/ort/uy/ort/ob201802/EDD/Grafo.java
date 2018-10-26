@@ -53,11 +53,6 @@ public class Grafo {
 			return true;
 		}
 		return false;
-		
-		
-//		int origen = this.vertices.buscarHashVertice(coordXi, coordYi);
-//		int destino = this.vertices.buscarHashVertice(coordXf, coordYf);		
-//		return this.matrizAdy[origen][destino] != -1;
 	}
 
 	public void modificarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf,
@@ -68,18 +63,6 @@ public class Grafo {
 		this.matrizAdy[verticeDestino][verticeOrigen] = nuevoValorPerdidaCalidad;
 	}
 
-	// recibe un vertice y retorna una lista con los vertices adyacentes
-//	public ListaVertices buscarAdyacentes(Vertice vertice) {
-//		ListaVertices lista = new ListaVertices();
-//		int indiceVerticeOrigen = vertices.buscarIndiceVertice(vertice.getCoordX(), vertice.getCoordY());
-//		for (int i = 0; i < matrizAdy.length; i++) {
-//			if (matrizAdy[indiceVerticeOrigen][i] != 0) {
-//				Vertice temp = vertices.buscarVerticeXindice(i);
-//				lista.insertarVertice(temp);
-//			}
-//		}
-//		return lista;
-//	}
 
 	public int getSize() {
 		return vertices.getSize();
@@ -99,15 +82,6 @@ public class Grafo {
 		return indice;
 	}
 
-//	public boolean esAdyacente(IVertice origen, IVertice destino) {
-//		int o = this.buscarIndiceVertice(origen.getCoordX(), origen.getCoordY());
-//		int d = this.buscarIndiceVertice(destino.getCoordX(), origen.getCoordY());
-//		if (this.matrizAdy[o][d] != 0) {
-//			return true;
-//		}
-//		return false;
-//	}
-
 	public boolean tramoIsValid(Double coordXi, Double coordYi, Double coordXf, Double coordYf) {
 		Vertice origen = this.buscarVertice(coordXi, coordYi);
 		Vertice destino = this.buscarVertice(coordXf, coordYf);
@@ -121,6 +95,10 @@ public class Grafo {
 
 	public String getVerticeId(double coordX, double coordY) {
 		return this.buscarVertice(coordX, coordY).getVerticeId();
+	}
+	
+	public Vertice getServidor() {
+		return vertices.getServidor();
 	}
 
 	// solo para las pruebas
