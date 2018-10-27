@@ -123,17 +123,7 @@ public class Grafo {
 
 	}
 
-	public void dibujarMapa() {
-		String direccion = this.armarStringMapa();
-		try {
-			Desktop.getDesktop().browse(new URL(direccion).toURI());
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-		}
-	}
-
-	private String armarStringMapa() {
+	public String dibujarMapa() {
 		String direccion = "http://maps.googleapis.com/maps/api/staticmap?center="
 				+ "Montevideo,Uruguay&zoom=13&size=1200x600&maptype=roadmap&";
 		Vertice serv = this.getServidor();

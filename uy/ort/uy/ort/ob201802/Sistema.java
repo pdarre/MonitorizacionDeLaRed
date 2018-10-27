@@ -1,5 +1,8 @@
 package uy.ort.ob201802;
 
+import java.awt.Desktop;
+import java.net.URL;
+
 import uy.ort.ob201802.EDD.AbbAfiliados;
 import uy.ort.ob201802.EDD.Grafo;
 import uy.ort.ob201802.Modelo.Afiliado;
@@ -138,7 +141,12 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno dibujarMapa() {
-		this.grafo.dibujarMapa();
+		String direccion = this.grafo.dibujarMapa();
+		try {
+			Desktop.getDesktop().browse(new URL(direccion).toURI());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return new Retorno(Resultado.OK);
 	}
 
