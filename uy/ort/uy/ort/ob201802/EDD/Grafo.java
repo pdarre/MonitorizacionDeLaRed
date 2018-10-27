@@ -1,6 +1,11 @@
 package uy.ort.ob201802.EDD;
 
+import java.awt.Desktop;
+import java.net.URL;
+
 import uy.ort.ob201802.Modelo.Canalera;
+import uy.ort.ob201802.Modelo.Nodo;
+import uy.ort.ob201802.Modelo.Servidor;
 import uy.ort.ob201802.Modelo.Vertice;
 import uy.ort.ob201802.Util.Dijkstra;
 
@@ -108,12 +113,39 @@ public class Grafo {
 	}
 
 	public int calidadCanalera(Double coordX, Double coordY) {
-		//Dijkstra dijkstra = new Dijkstra(this);
+		// Dijkstra dijkstra = new Dijkstra(this);
 		Vertice destino = buscarVertice(coordX, coordY);
 		return dijkstra.dijkstra(getServidor(), destino);
 	}
 
 	public String nodosCriticos() {
 		return dijkstra.nodosCriticos();
+
+	}
+
+	public void dibujarMapa() {
+		String direccion = this.armarStringMapa();
+		try {
+			Desktop.getDesktop().browse(new URL(direccion).toURI());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	private String armarStringMapa() {
+		String direccion = "http://maps.googleapis.com/maps/api/staticmap?center="
+				+ "Montevideo,Uruguay&zoom=13&size=1200x600&maptype=roadmap&";
+		Vertice serv = this.getServidor();
+		direccion += "markers=color:green%7Clabel:1%7C" + serv.getCoordX() + "," + serv.getCoordY();
+		Vertice[] vert = this.getHashTableVertices().getVertices();
+		for (int i = 0; i < vert.length; i++) {
+			if (vert[i] != null && vert[i] instanceof Nodo)
+				direccion += "&markers=color:blue%7Clabel:1%7C" + vert[i].getCoordX() + "," + vert[i].getCoordY();
+			if (vert[i] != null && vert[i] instanceof Canalera)
+				direccion += "&markers=color:red%7Clabel:1%7C" + vert[i].getCoordX() + "," + vert[i].getCoordY();
+			direccion += "&sensor=false&key=AIzaSyC2kHGtzaC3OOyc7Wi1LMBcEwM9btRZLqw";			
+		}
+		return direccion;
 	}
 }

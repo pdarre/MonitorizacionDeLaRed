@@ -138,7 +138,8 @@ public class Sistema implements ISistema {
 
 	@Override
 	public Retorno dibujarMapa() {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		this.grafo.dibujarMapa();
+		return new Retorno(Resultado.OK);
 	}
 
 	private String formatStringBuscarAfiliado(Afiliado a) {

@@ -15,6 +15,7 @@ public class Dijkstra {
 	private int tope;
 	Grafo grafo;
 	int[] dist;
+	private int[][] copiaMatriz;
 
 	public Dijkstra(Grafo g) {
 		this.matAdy = g.getMatriz();
@@ -36,7 +37,7 @@ public class Dijkstra {
 			;
 
 		dijkstraInterno(posO, dist, ant, vis);
-		
+
 		return dist[posD];
 	}
 
@@ -82,37 +83,40 @@ public class Dijkstra {
 		ListaVertices lista = new ListaVertices();
 		Vertice[] vert = vertices.getVertices();
 		Vertice v = null;
-		for (int i = 0; i < vertices.getSize(); i++) {			
+		for (int i = 0; i < vertices.getSize(); i++) {
 			if (vert[i] instanceof Nodo) {
 				v = vert[i];
 				copiaDeAristas(i);
-				eliminarAristas(i);				
+				eliminarAristas(i);
 				Vertice origen = this.getServidor();
 				Vertice destino = this.getCanalera();
 				this.dijkstra(origen, destino);
-				if(getNodoCritico(v)) lista.insertarVertice(v);				
+				if (getNodoCritico(v))
+					lista.insertarVertice(v);
 				armarMatriz(i);
-			}			
+			}
 		}
 		return this.formatearLista(lista);
 	}
-	
 
 	private void armarMatriz(int i) {
 		for (int j = 0; j < vertices.getSize(); j++) {
-			if(copiaMatriz[i][j] != -1) this.matAdy[i][j] = copiaMatriz[i][j];
-			if(copiaMatriz[j][i] != -1) this.matAdy[j][i] = copiaMatriz[j][i];
+			if (copiaMatriz[i][j] != -1)
+				this.matAdy[i][j] = copiaMatriz[i][j];
+			if (copiaMatriz[j][i] != -1)
+				this.matAdy[j][i] = copiaMatriz[j][i];
 		}
 	}
 
-	private int[][] copiaMatriz;
 	private void copiaDeAristas(int i) {
 		copiaMatriz = new int[vertices.getSize()][vertices.getSize()];
 		iniciarMatriz();
 		for (int j = 0; j < vertices.getSize(); j++) {
-			if(this.matAdy[i][j] != -1) copiaMatriz[i][j] = this.matAdy[i][j];
-			if(this.matAdy[j][i] != -1) copiaMatriz[j][i] = this.matAdy[j][i];
-		}		
+			if (this.matAdy[i][j] != -1)
+				copiaMatriz[i][j] = this.matAdy[i][j];
+			if (this.matAdy[j][i] != -1)
+				copiaMatriz[j][i] = this.matAdy[j][i];
+		}
 	}
 
 	private void eliminarAristas(int i) {
@@ -125,7 +129,8 @@ public class Dijkstra {
 	private boolean getNodoCritico(Vertice v) {
 		Vertice[] vert = vertices.getVertices();
 		for (int i = 0; i < dist.length; i++) {
-			if (vert[i] != null && !vert[i].equals(v) && !(vert[i] instanceof Servidor) && !(vert[i] instanceof Canalera)) {
+			if (vert[i] != null && !vert[i].equals(v) && !(vert[i] instanceof Servidor)
+					&& !(vert[i] instanceof Canalera)) {
 				if (dist[i] == Integer.MAX_VALUE) {
 					return true;
 				}
@@ -133,7 +138,7 @@ public class Dijkstra {
 		}
 		return false;
 	}
-	
+
 	private void iniciarMatriz() {
 		for (int i = 0; i < copiaMatriz.length; i++) {
 			for (int j = 0; j < copiaMatriz.length; j++) {

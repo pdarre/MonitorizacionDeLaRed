@@ -299,4 +299,10 @@ class Test1 {
 		assertEquals(ret.resultado.name() , "OK");
 		assertEquals(ret.valorString, "nodoId2|nodoId3|nodoId6|");
 	}
+	
+	@Test
+	public void dibujarMapa() {
+		this.crearGrafoCompleto();
+		assertEquals(sis.dibujarMapa().resultado.name(), "OK");
+	}
 }
