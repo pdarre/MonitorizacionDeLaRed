@@ -124,20 +124,16 @@ public class Sistema implements ISistema {
 	public Retorno calidadCanalera(Double coordX, Double coordY) {
 		if (this.grafo.buscarVertice(coordX, coordY) == null)
 			return new Retorno(Resultado.ERROR_1);
-
-		Dijkstra dijkstra = new Dijkstra(this.grafo);
-		Vertice destino = grafo.buscarVertice(coordX, coordY);
-		int perdida = dijkstra.dijkstra(grafo.getServidor(), destino);
-
+		int perdida = grafo.calidadCanalera(coordX, coordY);
 		if (perdida == Integer.MAX_VALUE)
 			return new Retorno(Resultado.ERROR_2);
-
 		return new Retorno(Resultado.OK, "", perdida);
 	}
 
 	@Override
 	public Retorno nodosCriticos() {
-		return new Retorno(Resultado.NO_IMPLEMENTADA);
+		String lista = grafo.nodosCriticos();
+		return new Retorno(Resultado.OK, lista, 0);
 	}
 
 	@Override

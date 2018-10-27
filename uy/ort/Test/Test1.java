@@ -290,14 +290,13 @@ class Test1 {
 		// nodoId7 - canaleraId14
 		assertEquals(sis.registrarTramo(-34.884928, -56.110715, -34.885236, -56.108902, 9).resultado.name(), "OK");
 	}
-
-//	// BORRAR!!!
-	public void printArray(Vertice[] v) {
-		for (int i = 0; i < v.length; i++) {
-			if (v[i] != null) {
-				System.out.println(v[i].getVerticeId() + "-" + i);
-			}
-		}
+	
+	@Test
+	public void nodosCriticos() {
+		this.crearGrafoCompleto();
+		
+		Retorno ret = sis.nodosCriticos();
+		assertEquals(ret.resultado.name() , "OK");
+		assertEquals(ret.valorString, "nodoId2|nodoId3|nodoId6|");
 	}
-
 }

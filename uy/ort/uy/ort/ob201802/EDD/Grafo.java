@@ -2,6 +2,7 @@ package uy.ort.ob201802.EDD;
 
 import uy.ort.ob201802.Modelo.Canalera;
 import uy.ort.ob201802.Modelo.Vertice;
+import uy.ort.ob201802.Util.Dijkstra;
 
 public class Grafo {
 
@@ -9,12 +10,14 @@ public class Grafo {
 	private int[][] matrizAdy;
 	private int contador;
 	private int tam;
+	private Dijkstra dijkstra;
 
 	public Grafo(int tam) {
 		this.contador = 0;
-		this.tam = tam;
 		this.vertices = new HashTableVertices(tam);
+		this.tam = vertices.getSize();
 		this.matrizAdy = new int[vertices.getSize()][vertices.getSize()];
+		dijkstra = new Dijkstra(this);
 		iniciarMatriz();
 	}
 
@@ -102,5 +105,15 @@ public class Grafo {
 	// solo para las pruebas
 	public HashTableVertices getHashTableVertices() {
 		return this.vertices;
+	}
+
+	public int calidadCanalera(Double coordX, Double coordY) {
+		//Dijkstra dijkstra = new Dijkstra(this);
+		Vertice destino = buscarVertice(coordX, coordY);
+		return dijkstra.dijkstra(getServidor(), destino);
+	}
+
+	public String nodosCriticos() {
+		return dijkstra.nodosCriticos();
 	}
 }

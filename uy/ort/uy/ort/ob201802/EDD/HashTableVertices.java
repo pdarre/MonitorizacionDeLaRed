@@ -133,4 +133,13 @@ public class HashTableVertices {
 		}
 		return null;
 	}
+
+	public void quitarVertice(int i) {
+		arrayVertices[i] = null;		
+	}
+
+	public void setVertices(Vertice[] temp) {
+		this.arrayVertices = temp;
+		
+	}
 }
