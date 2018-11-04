@@ -16,10 +16,12 @@ public class Grafo {
 	private int contador;
 	private int tam;
 	private Dijkstra dijkstra;
+	private int maximo;
 
 	public Grafo(int tam) {
 		this.contador = 0;
 		this.vertices = new HashTableVertices(tam);
+		this.maximo = tam;
 		this.tam = vertices.getSize();
 		this.matrizAdy = new int[vertices.getSize()][vertices.getSize()];
 		dijkstra = new Dijkstra(this);
@@ -43,10 +45,6 @@ public class Grafo {
 		return vertices.buscarVertice(coordX, coordY);
 	}
 
-	public boolean arregloHashLleno() {
-		return contador == this.getHashTableVertices().getSize();
-	}
-
 	public void registrarTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf, int perdidaCalidad) {
 		int origen = this.vertices.buscarIndiceVertice(coordXi, coordYi);
 		int destino = this.vertices.buscarIndiceVertice(coordXf, coordYf);
@@ -57,9 +55,8 @@ public class Grafo {
 	public boolean existeTramo(Double coordXi, Double coordYi, Double coordXf, Double coordYf) {
 		int origen = this.vertices.buscarIndiceVertice(coordXi, coordYi);
 		int destino = this.vertices.buscarIndiceVertice(coordXf, coordYf);
-		if (matrizAdy[origen][destino] != -1) {
+		if (matrizAdy[origen][destino] != -1)
 			return true;
-		}
 		return false;
 	}
 
@@ -75,13 +72,8 @@ public class Grafo {
 		return vertices.getSize();
 	}
 
-	// para pruebas
 	public int[][] getMatriz() {
 		return this.matrizAdy;
-	}
-
-	public IVertice[] getVertices() {
-		return vertices.getVertices();
 	}
 
 	public int buscarIndiceVertice(double coordX, double coordY) {
@@ -113,29 +105,31 @@ public class Grafo {
 	}
 
 	public int calidadCanalera(Double coordX, Double coordY) {
-		// Dijkstra dijkstra = new Dijkstra(this);
 		Vertice destino = buscarVertice(coordX, coordY);
 		return dijkstra.dijkstra(getServidor(), destino);
 	}
 
 	public String nodosCriticos() {
 		return dijkstra.nodosCriticos();
-
 	}
 
 	public String dibujarMapa() {
 		String direccion = "http://maps.googleapis.com/maps/api/staticmap?center="
 				+ "Montevideo,Uruguay&zoom=13&size=1200x600&maptype=roadmap&";
 		Vertice serv = this.getServidor();
-		direccion += "markers=color:green%7Clabel:1%7C" + serv.getCoordX() + "," + serv.getCoordY();
+		direccion += "markers=color:green%7Clabel:S%7C" + serv.getCoordX() + "," + serv.getCoordY();
 		Vertice[] vert = this.getHashTableVertices().getVertices();
 		for (int i = 0; i < vert.length; i++) {
 			if (vert[i] != null && vert[i] instanceof Nodo)
-				direccion += "&markers=color:blue%7Clabel:1%7C" + vert[i].getCoordX() + "," + vert[i].getCoordY();
+				direccion += "&markers=color:blue%7Clabel:N%7C" + vert[i].getCoordX() + "," + vert[i].getCoordY();
 			if (vert[i] != null && vert[i] instanceof Canalera)
-				direccion += "&markers=color:red%7Clabel:1%7C" + vert[i].getCoordX() + "," + vert[i].getCoordY();
-			direccion += "&sensor=false&key=AIzaSyC2kHGtzaC3OOyc7Wi1LMBcEwM9btRZLqw";			
+				direccion += "&markers=color:red%7Clabel:C%7C" + vert[i].getCoordX() + "," + vert[i].getCoordY();
+			direccion += "&sensor=false&key=AIzaSyC2kHGtzaC3OOyc7Wi1LMBcEwM9btRZLqw";
 		}
 		return direccion;
+	}
+
+	public boolean cantMaxima() {
+		return contador != this.maximo;
 	}
 }

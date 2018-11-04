@@ -6,10 +6,12 @@ public class HashTableVertices {
 
 	private Vertice[] arrayVertices;
 	private int size;
+	private int cantMaxima;
 
 	public HashTableVertices(int tam) {
 		size = this.buscarPrimo(tam * 2);
 		arrayVertices = new Vertice[size];
+		this.cantMaxima = 0;
 		iniciarArrayNodos();
 	}
 
@@ -43,6 +45,8 @@ public class HashTableVertices {
 	public int getHashVertice(double coordX, double coordY) {
 		double sumaCoord = coordX + coordY;
 		int castSuma = (int) sumaCoord;
+		if(castSuma > 0)
+			return castSuma % this.size;
 		int positivo = castSuma *= -1;
 		return positivo % this.size;
 	}
@@ -80,6 +84,7 @@ public class HashTableVertices {
 
 	public void registrarVertice(Vertice vertice) {
 		arrayVertices[getLugarEnArrayVertice(vertice)] = vertice;
+		this.cantMaxima++;
 	}
 
 	public int buscarHashVertice(Double coordX, Double coordY) {
@@ -139,7 +144,6 @@ public class HashTableVertices {
 	}
 
 	public void setVertices(Vertice[] temp) {
-		this.arrayVertices = temp;
-		
+		this.arrayVertices = temp;		
 	}
 }

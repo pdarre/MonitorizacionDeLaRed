@@ -49,7 +49,7 @@ class Test1 {
 		assertEquals(sis.buscarAfiliado("5.555.555-5").valorEntero, 3);
 		assertEquals(sis.buscarAfiliado("7.777.777-7").valorString, "7.777.777-7;Roberto;roberto@roberto.com");
 		assertEquals(sis.buscarAfiliado("7.777.777-7").valorEntero, 5);
-		assertEquals(sis.buscarAfiliado("1.111.111-2").resultado.name(), "ERROR_1");
+		assertEquals(sis.buscarAfiliado("1.111.111.1").resultado.name(), "ERROR_1");
 		assertEquals(sis.buscarAfiliado("8.888.888-8").resultado.name(), "ERROR_2");
 	}
 
@@ -68,7 +68,7 @@ class Test1 {
 
 	@Test
 	void registrarNodo() {
-		sis.inicializarSistema(2, -34.7599678, -55.7271004);
+		sis.inicializarSistema(5, -34.7599678, -55.7271004);
 		assertEquals(sis.registrarAfiliado("1.111.111-1", "Pablo", "pablo@pablo.com").resultado.name(), "OK");
 		assertEquals(sis.registrarNodo("nodo1", -24.7593868, -51.3865004).resultado.name(), "OK");
 		assertEquals(sis.registrarNodo("nodo2", -30.7593868, -51.3865004).resultado.name(), "OK");
@@ -84,7 +84,7 @@ class Test1 {
 
 	@Test
 	void registrarCanalera() {
-		sis.inicializarSistema(2, -34.7599678, -55.7271004);
+		sis.inicializarSistema(5, -34.7599678, -55.7271004);
 		assertEquals(sis.registrarAfiliado("1.111.111-1", "Pablo", "pablo@pablo.com").resultado.name(), "OK");
 		assertEquals(sis.registrarAfiliado("2.222.222-2", "Juan", "juan@juan.com").resultado.name(), "OK");
 		assertEquals(sis.registrarAfiliado("3.333.333-3", "Lucia", "lucia@lucia.com").resultado.name(), "OK");
@@ -95,10 +95,6 @@ class Test1 {
 		assertEquals(sis.registrarCanalera("chip2", "2.222.222-2", -59.7593868, -51.3865004).resultado.name(), "OK");
 		assertEquals(sis.registrarCanalera("chip3", "3.333.333-3", -61.7593868, -51.3865004).resultado.name(), "OK");
 		assertEquals(sis.registrarCanalera("chip4", "4.444.444-4", -20.7593868, -40.3865004).resultado.name(), "OK");
-
-		// ERROR_1 no hay mas lugar en el arreglo
-		assertEquals(sis.registrarCanalera("chip5", "5.555.555-5", -12.7593868, -51.3865004).resultado.name(),
-				"ERROR_1");
 	}
 
 	@Test
@@ -183,7 +179,7 @@ class Test1 {
 	private void crearGrafoCompleto() {
 		sis.destruirSistema();
 		// Servidor
-		sis.inicializarSistema(20, -34.904081, -56.190410);
+		sis.inicializarSistema(60, -34.904081, -56.190410);
 		// Afiliados
 		assertEquals(sis.registrarAfiliado("4.444.444-4", "Lucia", "lucia@lucia.com").resultado.name(), "OK");
 		assertEquals(sis.registrarAfiliado("3.333.333-3", "Maria", "maria@maria.com").resultado.name(), "OK");
@@ -209,6 +205,8 @@ class Test1 {
 		assertEquals(sis.registrarNodo("nodoId5", -34.901274, -56.139839).resultado.name(), "OK");
 		assertEquals(sis.registrarNodo("nodoId6", -34.885342, -56.121980).resultado.name(), "OK");
 		assertEquals(sis.registrarNodo("nodoId7", -34.884928, -56.110715).resultado.name(), "OK");
+		
+		assertEquals(sis.registrarNodo("nodoId8", -34.922508, -56.161464).resultado.name(), "OK");
 
 		// Canaleras
 		assertEquals(sis.registrarCanalera("CanaleraId1", "1.111.111-1", -34.893944, -56.189678).resultado.name(),
@@ -259,6 +257,8 @@ class Test1 {
 		assertEquals(sis.registrarTramo(-34.870581, -56.138626, -34.885342, -56.121980, 10).resultado.name(), "OK");
 		// nodo6-nodo7-25
 		assertEquals(sis.registrarTramo(-34.885342, -56.121980, -34.884928, -56.110715, 25).resultado.name(), "OK");
+		//nodoId4 - nodoId8
+		assertEquals(sis.registrarTramo(-34.911098, -56.165418, -34.922508, -56.161464, 17).resultado.name(), "OK");
 
 		// tramos entre nodo-canalera
 		// nodoId1 - canaleraId1
@@ -297,7 +297,7 @@ class Test1 {
 		
 		Retorno ret = sis.nodosCriticos();
 		assertEquals(ret.resultado.name() , "OK");
-		assertEquals(ret.valorString, "nodoId2|nodoId3|nodoId6|");
+		assertEquals(ret.valorString, "nodoId2|nodoId3|nodoId4|nodoId6");
 	}
 	
 	@Test

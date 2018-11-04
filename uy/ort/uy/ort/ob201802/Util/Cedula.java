@@ -1,6 +1,5 @@
 package uy.ort.ob201802.Util;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Cedula {
@@ -46,16 +45,8 @@ public class Cedula {
 		return Integer.parseInt(ci.replaceAll("[\\s\\-\\.\\'\\?/?\\¿\\!\\¡\\,\\:\\)\\(\\_\\@]+", ""));
 	}
 
-	//TEMPORAL, CAMBIAR A EXPRESION REGULAR
 	public static boolean checkFormato(String ci) {
-		if (ci.length() >= 11) {
-			String uno = String.valueOf(ci.charAt(1));
-			String dos = String.valueOf(ci.charAt(5));
-			String tres = String.valueOf(ci.charAt(9));
-			if (uno.equals(".") && dos.equals(".") && tres.equals("-")) {
-				return true;
-			}
-		}
-		return false;
+		String regex = "[0-9]{1,}+.+[0-9]{3,}+.+[0-9]{3,}+-+[0-9]{1,}";
+		return Pattern.matches(regex, ci);
 	}
 }

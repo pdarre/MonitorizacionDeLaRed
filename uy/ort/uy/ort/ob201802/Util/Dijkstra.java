@@ -128,14 +128,11 @@ public class Dijkstra {
 
 	private boolean getNodoCritico(Vertice v) {
 		Vertice[] vert = vertices.getVertices();
-		for (int i = 0; i < dist.length; i++) {
+		for (int i = 0; i < dist.length; i++)
 			if (vert[i] != null && !vert[i].equals(v) && !(vert[i] instanceof Servidor)
-					&& !(vert[i] instanceof Canalera)) {
-				if (dist[i] == Integer.MAX_VALUE) {
+					&& !(vert[i] instanceof Canalera))
+				if (dist[i] == Integer.MAX_VALUE)
 					return true;
-				}
-			}
-		}
 		return false;
 	}
 
@@ -151,7 +148,11 @@ public class Dijkstra {
 		Vertice temp = (Vertice) lista.getRaiz();
 		String retorno = "";
 		while (temp != null) {
-			retorno += temp.getVerticeId() + "|";
+			if (temp.getSiguiente() == null) {
+				retorno += temp.getVerticeId();
+			} else {
+				retorno += temp.getVerticeId() + "|";
+			}
 			temp = temp.getSiguiente();
 		}
 		return retorno;

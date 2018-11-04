@@ -19,6 +19,7 @@ public class Sistema implements ISistema {
 
 	private AbbAfiliados arbolAfiliados;
 	private Grafo grafo;
+	private int maxPuntos;
 
 	@Override
 	public Retorno inicializarSistema(int maxPuntos, Double coordX, Double coordY) {
@@ -28,6 +29,7 @@ public class Sistema implements ISistema {
 		this.arbolAfiliados = new AbbAfiliados();
 		this.grafo = new Grafo(maxPuntos);
 		this.registrarServidor(new Servidor(coordX, coordY));
+		this.maxPuntos = maxPuntos;
 		return new Retorno(Resultado.OK);
 	}
 
@@ -58,7 +60,6 @@ public class Sistema implements ISistema {
 	public Retorno buscarAfiliado(String CI) {
 		if (!Cedula.checkFormato(CI) || !Cedula.esCIValida(Cedula.convertirCI(CI)))
 			return new Retorno(Resultado.ERROR_1);
-
 		Afiliado a = arbolAfiliados.getAfiliadoByCi(CI);
 		if (a != null) {
 			String ret = formatStringBuscarAfiliado(a);
@@ -77,20 +78,24 @@ public class Sistema implements ISistema {
 	@Override
 	public Retorno registrarCanalera(String chipid, String CIafiliado, Double coordX, Double coordY) {
 		Vertice vertice = new Canalera(chipid, CIafiliado, coordX, coordY);
-		if (this.grafo.arregloHashLleno())
+		if (!this.grafo.cantMaxima())
 			return new Retorno(Resultado.ERROR_1);
 		if (this.grafo.buscarVertice(coordX, coordY) != null)
 			return new Retorno(Resultado.ERROR_2);
-		if (this.buscarAfiliado(CIafiliado) == null)
+		if (!this.existeAfiliado(CIafiliado))
 			return new Retorno(Resultado.ERROR_3);
 		this.grafo.registrarVertice(vertice);
 		return new Retorno(Resultado.OK);
 	}
 
+	private boolean existeAfiliado(String cIafiliado) {
+		return arbolAfiliados.getAfiliadoByCi(cIafiliado) != null;
+	}
+
 	@Override
 	public Retorno registrarNodo(String nodoid, Double coordX, Double coordY) {
 		Vertice vertice = new Nodo(nodoid, coordX, coordY);
-		if (this.grafo.arregloHashLleno())
+		if (!this.grafo.cantMaxima())
 			return new Retorno(Resultado.ERROR_1);
 		if (this.grafo.buscarVertice(coordX, coordY) != null)
 			return new Retorno(Resultado.ERROR_2);
