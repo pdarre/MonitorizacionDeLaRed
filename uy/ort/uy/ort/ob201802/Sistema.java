@@ -12,7 +12,6 @@ import uy.ort.ob201802.Modelo.Servidor;
 import uy.ort.ob201802.Modelo.Vertice;
 import uy.ort.ob201802.Retorno.Resultado;
 import uy.ort.ob201802.Util.Cedula;
-import uy.ort.ob201802.Util.Dijkstra;
 import uy.ort.ob201802.Util.Email;
 
 public class Sistema implements ISistema {
