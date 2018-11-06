@@ -158,17 +158,4 @@ public class Sistema implements ISistema {
 	private String formatStringBuscarAfiliado(Afiliado a) {
 		return a.getCedula() + ";" + a.getNombre() + ";" + a.getEmail();
 	}
-
-	// PARA PRUEBAS
-	public AbbAfiliados getArbolAfiliados() {
-		return arbolAfiliados;
-	}
-
-	public Grafo getGrafo() {
-		return grafo;
-	}
-
-	public void setGrafo(Grafo grafo) {
-		this.grafo = grafo;
-	}
 }

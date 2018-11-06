@@ -94,7 +94,20 @@ class Test1 {
 		assertEquals(sis.registrarCanalera("chip1", "1.111.111-1", -24.7593868, -51.3865004).resultado.name(), "OK");
 		assertEquals(sis.registrarCanalera("chip2", "2.222.222-2", -59.7593868, -51.3865004).resultado.name(), "OK");
 		assertEquals(sis.registrarCanalera("chip3", "3.333.333-3", -61.7593868, -51.3865004).resultado.name(), "OK");
+
+		// ERROR_3 El afiliado no existe
+		assertEquals(sis.registrarCanalera("chip5", "6.666.666-6", -61.7593862, -51.5865004).resultado.name(),
+				"ERROR_3");
+
+		// ERROR_2 Ya existe un punto en las coordenadas coordX, coordY del sistema
+		assertEquals(sis.registrarCanalera("chip5", "1.111.111-1", -61.7593868, -51.3865004).resultado.name(),
+				"ERROR_2");
+
 		assertEquals(sis.registrarCanalera("chip4", "4.444.444-4", -20.7593868, -40.3865004).resultado.name(), "OK");
+
+		// ERROR_1 En el sistema ya hay registrados cantPuntos punto
+		assertEquals(sis.registrarCanalera("chip5", "5.555.555-5", -20.7593878, -40.3865054).resultado.name(),
+				"ERROR_1");
 	}
 
 	@Test
@@ -205,7 +218,7 @@ class Test1 {
 		assertEquals(sis.registrarNodo("nodoId5", -34.901274, -56.139839).resultado.name(), "OK");
 		assertEquals(sis.registrarNodo("nodoId6", -34.885342, -56.121980).resultado.name(), "OK");
 		assertEquals(sis.registrarNodo("nodoId7", -34.884928, -56.110715).resultado.name(), "OK");
-		
+
 		assertEquals(sis.registrarNodo("nodoId8", -34.922508, -56.161464).resultado.name(), "OK");
 
 		// Canaleras
@@ -257,7 +270,7 @@ class Test1 {
 		assertEquals(sis.registrarTramo(-34.870581, -56.138626, -34.885342, -56.121980, 10).resultado.name(), "OK");
 		// nodo6-nodo7-25
 		assertEquals(sis.registrarTramo(-34.885342, -56.121980, -34.884928, -56.110715, 25).resultado.name(), "OK");
-		//nodoId4 - nodoId8
+		// nodoId4 - nodoId8
 		assertEquals(sis.registrarTramo(-34.911098, -56.165418, -34.922508, -56.161464, 17).resultado.name(), "OK");
 
 		// tramos entre nodo-canalera
@@ -290,19 +303,18 @@ class Test1 {
 		// nodoId7 - canaleraId14
 		assertEquals(sis.registrarTramo(-34.884928, -56.110715, -34.885236, -56.108902, 9).resultado.name(), "OK");
 	}
-	
+
 	@Test
 	public void nodosCriticos() {
 		this.crearGrafoCompleto();
-		
 		Retorno ret = sis.nodosCriticos();
-		assertEquals(ret.resultado.name() , "OK");
+		assertEquals(ret.resultado.name(), "OK");
 		assertEquals(ret.valorString, "nodoId2|nodoId3|nodoId4|nodoId6");
 	}
-	
-	@Test
-	public void dibujarMapa() {
-		this.crearGrafoCompleto();
-		assertEquals(sis.dibujarMapa().resultado.name(), "OK");
-	}
+
+//	@Test
+//	public void dibujarMapa() {
+//		this.crearGrafoCompleto();
+//		assertEquals(sis.dibujarMapa().resultado.name(), "OK");
+//	}
 }

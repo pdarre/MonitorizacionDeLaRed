@@ -114,6 +114,7 @@ public class Grafo {
 	}
 
 	public String dibujarMapa() {
+		String key = "AIzaSyC2kHGtzaC3OOyc7Wi1LMBcEwM9btRZLqw";
 		String direccion = "http://maps.googleapis.com/maps/api/staticmap?center="
 				+ "Montevideo,Uruguay&zoom=13&size=1200x600&maptype=roadmap&";
 		Vertice serv = this.getServidor();
@@ -124,7 +125,7 @@ public class Grafo {
 				direccion += "&markers=color:blue%7Clabel:N%7C" + vert[i].getCoordX() + "," + vert[i].getCoordY();
 			if (vert[i] != null && vert[i] instanceof Canalera)
 				direccion += "&markers=color:red%7Clabel:C%7C" + vert[i].getCoordX() + "," + vert[i].getCoordY();
-			direccion += "&sensor=false&key=AIzaSyC2kHGtzaC3OOyc7Wi1LMBcEwM9btRZLqw";
+			direccion += "&sensor=false&key=" + key;
 		}
 		return direccion;
 	}
