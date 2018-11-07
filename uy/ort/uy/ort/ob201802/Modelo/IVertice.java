@@ -1,6 +1,4 @@
-package uy.ort.ob201802.EDD;
-
-import uy.ort.ob201802.Modelo.Vertice;
+package uy.ort.ob201802.Modelo;
 
 public interface IVertice {
 	

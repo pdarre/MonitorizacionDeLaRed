@@ -1,7 +1,5 @@
 package uy.ort.ob201802.Modelo;
 
-import uy.ort.ob201802.EDD.IVertice;
-
 public class Nodo extends Vertice{
 
 	private String nodoId;

@@ -1,7 +1,5 @@
 package uy.ort.ob201802.Modelo;
 
-import uy.ort.ob201802.EDD.IVertice;
-
 public class Vertice implements IVertice {
 
 	private double coordX;

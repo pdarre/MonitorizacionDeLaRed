@@ -1,5 +1,6 @@
 package uy.ort.ob201802.EDD;
 
+import uy.ort.ob201802.Modelo.IVertice;
 import uy.ort.ob201802.Modelo.Vertice;
 
 public class ListaVertices {
