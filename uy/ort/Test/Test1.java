@@ -312,9 +312,9 @@ class Test1 {
 		assertEquals(ret.valorString, "nodoId2|nodoId3|nodoId4|nodoId6");
 	}
 
-//	@Test
-//	public void dibujarMapa() {
-//		this.crearGrafoCompleto();
-//		assertEquals(sis.dibujarMapa().resultado.name(), "OK");
-//	}
+	@Test
+	public void dibujarMapa() {
+		this.crearGrafoCompleto();
+		assertEquals(sis.dibujarMapa().resultado.name(), "OK");
+	}
 }
