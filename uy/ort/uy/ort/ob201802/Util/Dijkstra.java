@@ -82,15 +82,15 @@ public class Dijkstra {
 	public String nodosCriticos() {
 		ListaVertices lista = new ListaVertices();
 		Vertice[] vert = vertices.getVertices();
+		Vertice origen = this.getServidor();
+		Vertice destino = this.getCanalera();
 		Vertice v = null;
 		for (int i = 0; i < vertices.getSize(); i++) {
 			if (vert[i] instanceof Nodo) {
 				v = vert[i];
 				copiaDeAristas(i);
-				eliminarAristas(i);
-				Vertice origen = this.getServidor();
-				Vertice destino = this.getCanalera();
-				this.dijkstra(origen, destino);
+				eliminarAristas(i);				
+				dijkstra(origen, destino);
 				if (getNodoCritico(v))
 					lista.insertarVertice(v);
 				armarMatriz(i);

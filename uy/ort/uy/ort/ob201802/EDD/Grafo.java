@@ -116,7 +116,7 @@ public class Grafo {
 	public String dibujarMapa() {
 		String key = "AIzaSyC2kHGtzaC3OOyc7Wi1LMBcEwM9btRZLqw";
 		String direccion = "http://maps.googleapis.com/maps/api/staticmap?center="
-				+ "-34.905072,-56.194833&zoom=15&size=1200x600&maptype=roadmap&";
+				+ "-34.908912,-56.194980&zoom=16&size=1200x600&maptype=roadmap&";
 		Vertice serv = this.getServidor();
 		direccion += "markers=color:green%7Clabel:S%7C" + serv.getCoordX() + "," + serv.getCoordY();
 		Vertice[] vert = this.getHashTableVertices().getVertices();
