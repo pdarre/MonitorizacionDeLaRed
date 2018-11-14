@@ -113,7 +113,7 @@ public class Grafo {
 		return dijkstra.nodosCriticos();
 	}
 
-	public String dibujarMapa() {
+	public String dibujarMapa() { 
 		String key = "AIzaSyC2kHGtzaC3OOyc7Wi1LMBcEwM9btRZLqw";
 		String direccion = "http://maps.googleapis.com/maps/api/staticmap?center="
 				+ "-34.908912,-56.194980&zoom=16&size=1200x600&maptype=roadmap&";
